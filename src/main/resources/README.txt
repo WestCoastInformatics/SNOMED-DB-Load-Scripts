@@ -14,6 +14,9 @@ Key Features
 * Support for Oracle, Postgres, and MySQL (and MariaDB)
 * Support for RF2 data format
 * Denormalization of concept/description ids for contextualized lookup
+* Builds transitive closure table from RF2 snapshot, inferred, SNOMED file.
+* Support for Postgres, Oracle, MySQL (and MariaDB)
+* Views with denormalized concept preferred names
 
 Developer Notes
 ---------------
