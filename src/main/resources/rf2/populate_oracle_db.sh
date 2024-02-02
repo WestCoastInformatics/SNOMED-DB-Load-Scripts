@@ -31,6 +31,21 @@ echo "    Create tables ... `/bin/date`" >> oracle.log 2>&1
 echo "@oracle_tables.sql" |  $ORACLE_HOME/bin/sqlplus $user/$password@$tns_name  >> oracle.log 2>&1
 if [ $? -ne 0 ]; then ef=1; fi
 
+## Load TC table
+if [ $ef -ne 1 ]; then
+echo "    Load transitive closure table ... `/bin/date`" >> oracle.log 2>&1
+$ORACLE_HOME/bin/sqlldr $user/$password@$tns_name control="transitiveclosure.ctl" >> oracle.log 2>&1
+if [ $? -ne 0 ]; then ef=1; fi
+cat concept.log >> oracle.log
+fi
+
+if [ $ef -ne 1 ]; then
+echo "    Create views ... `/bin/date`" >> oracle.log 2>&1
+echo "@oracle_view.sql"|$ORACLE_HOME/bin/sqlplus $user/$password@$tns_name  >> oracle.log 2>&1
+if [ $? -ne 0 ]; then ef=1; fi
+fi
+
+## Load RF2 tables
 if [ $ef -ne 1 ]; then
 echo "    Load concept table data ... `/bin/date`" >> oracle.log 2>&1
 $ORACLE_HOME/bin/sqlldr $user/$password@$tns_name control="concept.ctl" >> oracle.log 2>&1
