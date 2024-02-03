@@ -9,10 +9,14 @@ sudo chmod +x rf2/populate_mysql_db.sh
 
 ### MySQL 5.7
 1. For testing mysql, run a docker mysql instance - https://hub.docker.com/_/mysql
-2. Launch the container
+
+
+2. Launch the container </br>
 `docker run --name snomed-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=snomed -d --rm mysql:5.7`
+
+
 3. Build Server
-   i. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command: `docker inspect <container name or id> | grep "IPAddress"`
+   i. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command:</br> `docker inspect <container name or id> | grep "IPAddress"`
 ```
 export host=172.17.0.1
 export dir=/wci/data/
@@ -26,10 +30,12 @@ root@842bfb3da1f1:/data/rf2# ./populate_mysql_db.sh
 
 ### MySQL 8.0
 
-1. Launch the container
+1. Launch the container </br>
 `docker run --name snomed-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=snomed -d --rm mysql:8.0 --local_infile=ON`
+
+
 2. Build Server
-   i. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command: `docker inspect <container name or id> | grep "IPAddress"`
+   i. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command:</br> `docker inspect <container name or id> | grep "IPAddress"`
 ```
 export host=172.17.0.1
 export dir=/wci/data/
@@ -41,10 +47,12 @@ root@842bfb3da1f1:/data/rf2# ./populate_mysql_db.sh
 ```
 
 ### MariaDB - 10.11 
-1. Launch the container
+1. Launch the container </br>
 `docker run --name snomed-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=snomed -d --rm mariadb:10.11`
+
+
 2. Build Server
-   i. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command: `docker inspect <container name or id> | grep "IPAddress"`
+   i. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command:</br> `docker inspect <container name or id> | grep "IPAddress"`
 ```
 export host=172.17.0.1
 export dir=/wci/data/
@@ -72,8 +80,10 @@ root@842bfb3da1f1:/data/rf2# ./populate_mysql_db.sh
 ### MySQL 5.7
 1. For testing mysql, run a docker mysql instance - https://hub.docker.com/_/mysql
 
-2. Launch the container
+
+2. Launch the container </br>
 `docker run --name snomed-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=snomed -d --rm mysql:5.7`
+
 
 3. git bash (to simulate running in Linux)
 ```
@@ -85,8 +95,9 @@ root@842bfb3da1f1:/data/rf2# ./populate_mysql_db.sh
 ```
 
 ### MySQL 8.0 
-1. Launch the container
+1. Launch the container </br>
 `docker run --name snomed-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=snomed -d --rm mysql:8.0 --local_infile=ON`
+
 
 2. git bash (to simulate running in Linux)
 ```
@@ -98,8 +109,9 @@ root@842bfb3da1f1:/data/rf2# ./populate_mysql_db.sh
 ```
 
 ### MariaDB - 10.11
-1. Launch the container
+1. Launch the container </br>
 `docker run --name snomed-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=snomed -d --rm mariadb:10.11`
+
 
 2. git bash (to simulate running in Linux)
 ```

@@ -28,7 +28,7 @@ find . -name "*txt" |\
 ```
 
 # PLACEHOLDER
-* the below code is the same as the above, but with contains TransitiveClosure, which isn't added anything to the count
+* the below code is the same as the above, but with contains TransitiveClosure, which doesn't add anything to the count
 
 ```
 find . -name "*txt" |\
