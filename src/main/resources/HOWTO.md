@@ -20,14 +20,10 @@ Installation
 		- 'Snapshot' folder
 		- *.sql files
 		- *.ctl files (for oracle only)
-		- one *.bat file
 		- one *.sh file
 
 5.	In a text editor, open the temp-folder's appropriate "populate" script in a text editor as defined by your platform and database. 
 	* For example:
-		- For MySQL (or MariadB) on Windows, use the "populate_mysql_db.bat" script
-		- For Postgres on Windows, use the "populate_postgres_db.bat" script
-		- For Oracle on Windows, use the "populate_oracle_db.bat" script
 		- For MySQL (or MariaDB) on Linux/Unix/MacOS, use the "populate_mysql_db.sh" script
 		- For Postgres on Linux/Unix/MacOS, use the "populate_postgres_db.sh" script
 		- For Oracle on Linux/Unix/MacOS, use the "populate_oracle_db.sh" script

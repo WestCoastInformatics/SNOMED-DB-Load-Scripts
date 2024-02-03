@@ -15,7 +15,6 @@
 cd /wci/data
 unzip -o /wci/projects/SNOMED-DB-Load-Scripts/target/snomed-db-scripts-oracle.*.zip
 sudo chmod +x rf2/populate_oracle_db.sh
-sudo chmod +x rf2/populate_oracle_db_tc.sh
 
 ##### Oracle 12c
 
@@ -59,7 +58,7 @@ sudo docker run --name snomed-oracle -v $dir:/data -d --rm -p 8080:8080 -p 1521:
 sudo docker run --name snomed-oracle -v $dir:/data -d --rm -p 8080:8080 -p 1521:1521  container-registry.oracle.com/database/enterprise:12.1.0.2
 
 #
-# populate_oracle_db.sh, populate_oracle_db_tc.sh
+# populate_oracle_db.sh
 #
 # Launch the container
 #
@@ -74,7 +73,6 @@ exit
 
 root@842bfb3da1f1:/# cd /data/rf2
 root@842bfb3da1f1:/data/rf2# ./populate_oracle_db.sh
-root@842bfb3da1f1:/data/rf2# ./populate_oracle_db_tc.sh
 
 #
 # Connect to Oracle database to query tables
