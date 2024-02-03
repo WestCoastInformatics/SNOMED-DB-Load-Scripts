@@ -36,13 +36,13 @@ concept names, thus making the transitive closure table more useful.
 
 Installation
 ------------
-* See [HOWTO.txt](src/main/resources/HOWTO.txt) file to understand how to load the rf2 files into the database
+* See [HOWTO.txt](src/main/resources/HOWTO.md) file to understand how to load the rf2 files into the database
 
 See Also
 --------
 * [src/main/resources/LICENSE.txt](src/main/resources/LICENSE.txt)
-* [src/main/resources/README.txt](src/main/resources/README.txt)
-* [src/main/resources/HOWTO.txt](src/main/resources/HOWTO.txt)
+* [src/main/resources/README.txt](src/main/resources/README.md)
+* [src/main/resources/HOWTO.txt](src/main/resources/HOWTO.md)
 * [src/main/perl/transitiveClosure.pl](src/main/assembly/perl/transitiveClosure.pl) - this is just a pure Perl script for generating transitive closure from a SNOMED relationships file.
 ```
 $ ./transitiveClosure.pl
