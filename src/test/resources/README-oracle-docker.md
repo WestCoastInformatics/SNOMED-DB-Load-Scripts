@@ -1,10 +1,13 @@
 # Oracle 12c
 ## Prerequisites
-  - Log into DockerHub and agree to Oracle's Terms of Service
-     - https://hub.docker.com/_/oracle-database-enterprise-edition?tab=description (Click "Proceed to checkout")
+- Log into DockerHub and agree to Oracle's Terms of Service
+   - https://hub.docker.com/_/oracle-database-enterprise-edition?tab=description (Click "Proceed to checkout")
 
- - For testing oracle, run a docker oracle instance
-    - https://dzone.com/articles/oracle-12c-image-installation-in-docker
+- For testing oracle, run a docker oracle instance
+   - https://dzone.com/articles/oracle-12c-image-installation-in-docker
+
+- If you're running this locally, you will use `localhost` as the host. If you're running this on a remote server,
+  you will use the server's IP address as the host.
 
  If running an Oracle Database Docker Container on Linux use docker login and enter your hub.docker.com
  credentials for image to download.

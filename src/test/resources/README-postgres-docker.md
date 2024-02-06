@@ -1,6 +1,8 @@
 # LINUX INSTRUCTIONS 
 
 ## File Setup LINUX (BUILD SERVER)
+If you're running this locally, you will use `localhost` as the host. If you're running this on a remote server,
+you will use the server's IP address as the host.
 ```
 cd /wci/data
 unzip -o /wci/projects/SNOMED-CT-Transitive-Closure/target/snomed-transitive-closure-postgres.*.zip
