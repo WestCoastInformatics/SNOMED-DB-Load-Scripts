@@ -1,28 +1,27 @@
 # Oracle 12c
 ## Prerequisites
-- Log into DockerHub and agree to Oracle's Terms of Service
+1. Log into DockerHub and agree to Oracle's Terms of Service
    - https://hub.docker.com/_/oracle-database-enterprise-edition?tab=description (Click "Proceed to checkout")
 
-- For testing oracle, run a docker oracle instance
+2. For testing oracle, run a docker oracle instance
    - https://dzone.com/articles/oracle-12c-image-installation-in-docker
 
-- If you're running this locally, you will use `localhost` as the host. If you're running this on a remote server,
+3. If you're running this locally, you will use `localhost` as the host. If you're running this on a remote server,
   you will use the server's IP address as the host.
 
- If running an Oracle Database Docker Container on Linux use docker login and enter your hub.docker.com
+4. If running an Oracle Database Docker Container on Linux use docker login and enter your hub.docker.com
  credentials for image to download.
 
 
 ## File Setup WINDOWS
 
-* Download the SNOMED distribution from NLM
-* Unpack to c:/data/SnomedCT_International (for international edition)
-* Unpack to c:/data/SnomedCT_US (for US edition)
-* Clone and build these projects
-    * git@github.com:WestCoastInformatics/SNOMED-DB-Load-Scripts.git
-    * git@github.com:WestCoastInformatics/SNOMED-CT-Transitive-Closure.git
-* Open the target/snomed*-oracle*zip file
-* Copy the contents of the "rf2" directory to folder where SNOMED data is unpacked (see above)
+1. Download the SNOMED distribution from NLM
+2. Unpack to c:/data/SnomedCT_International (for international edition)
+3. Unpack to c:/data/SnomedCT_US (for US edition)
+4. Clone and build the project
+    1. git@github.com:WestCoastInformatics/SNOMED-DB-Load-Scripts.git
+5. Open the target/snomed*-oracle*zip file
+6. Copy the contents of the "rf2" directory to folder where SNOMED data is unpacked (see above)
 
 ## File Setup LINUX (BUILD SERVER)
 ```

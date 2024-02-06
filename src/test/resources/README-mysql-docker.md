@@ -1,8 +1,6 @@
 # LINUX INSTRUCTIONS
 
 ## File Setup LINUX (BUILD SERVER)
-If you're running this locally, you will use `localhost` as the host. If you're running this on a remote server, 
-you will use the server's IP address as the host.
 ```
 cd /wci/data
 unzip -o /wci/projects/SNOMED-DB-Load-Scripts/target/snomed-db-scripts-mysql.*.zip
@@ -18,7 +16,9 @@ sudo chmod +x rf2/populate_mysql_db.sh
 
 
 3. Build Server
-   i. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command:</br> `docker inspect <container name or id> | grep "IPAddress"`
+   1. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command:</br> `docker inspect <container name or id> | grep "IPAddress"`
+   2. If you're running this locally, you will use `localhost` as the host. 
+   3. If you're running this on a remote server, you will use the server's IP address as the host.
 ```
 export host=172.17.0.1
 export dir=/wci/data/
@@ -37,7 +37,9 @@ root@842bfb3da1f1:/data/rf2# ./populate_mysql_db.sh
 
 
 2. Build Server
-   i. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command:</br> `docker inspect <container name or id> | grep "IPAddress"`
+   1. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command:</br> `docker inspect <container name or id> | grep "IPAddress"`
+   2. If you're running this locally, you will use `localhost` as the host. 
+   3. If you're running this on a remote server, you will use the server's IP address as the host.
 ```
 export host=172.17.0.1
 export dir=/wci/data/
@@ -54,7 +56,9 @@ root@842bfb3da1f1:/data/rf2# ./populate_mysql_db.sh
 
 
 2. Build Server
-   i. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command:</br> `docker inspect <container name or id> | grep "IPAddress"`
+   1. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command:</br> `docker inspect <container name or id> | grep "IPAddress"`
+   2. If you're running this locally, you will use `localhost` as the host. 
+   3. If you're running this on a remote server, you will use the server's IP address as the host.
 ```
 export host=172.17.0.1
 export dir=/wci/data/
@@ -72,9 +76,8 @@ root@842bfb3da1f1:/data/rf2# ./populate_mysql_db.sh
 1. Download the SNOMED distribution from NLM
 2. Unpack to c:/data/SnomedCT_International (for international edition)
 3. Unpack to c:/data/SnomedCT_US (for US edition)
-4. Clone and build these projects
-    * git@github.com:WestCoastInformatics/SNOMED-DB-Load-Scripts.git
-    * git@github.com:WestCoastInformatics/SNOMED-CT-Transitive-Closure.git
+4. Clone and build the project
+   1. git@github.com:WestCoastInformatics/SNOMED-DB-Load-Scripts.git
 5. Open the target/snomed*-mysql*zip file
 6. Copy the contents of the "rf2" directory to folder where SNOMED data is unpacked (see above)
 
