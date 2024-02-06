@@ -16,12 +16,12 @@
 ## File Setup WINDOWS
 
 1. Download the SNOMED distribution from NLM
-2. Unpack to c:/data/SnomedCT_International (for international edition)
-3. Unpack to c:/data/SnomedCT_US (for US edition)
-4. Clone and build the project
-    1. git@github.com:WestCoastInformatics/SNOMED-DB-Load-Scripts.git
-5. Open the target/snomed*-oracle*zip file
-6. Copy the contents of the "rf2" directory to folder where SNOMED data is unpacked (see above)
+   1. Unpack to `c:/data/SnomedCT_International` (for international edition)
+   2. Unpack to `c:/data/SnomedCT_US` (for US edition)
+2. Clone and build the project
+    1. `git@github.com:WestCoastInformatics/SNOMED-DB-Load-Scripts.git`
+3. Open the `target/snomed-db-scripts-oracle.zip` file
+4. Copy the contents of the `rf2` directory to the folder where SNOMED data is unpacked (see above)
 
 ## File Setup LINUX (BUILD SERVER)
 ```
