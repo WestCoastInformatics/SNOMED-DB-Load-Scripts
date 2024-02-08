@@ -1,22 +1,6 @@
 # LINUX INSTRUCTIONS
 ## Pre-requisites
-Before proceeding, you will need to update the hostname in the load script. This will be necessary for the next steps 
-to run the load script. 
-### Terminal Option: 
-```
-   cd /wci/projects/SNOMED-DB-Load-Scripts
-   vim rf2/populate_mysql_db.sh
-   
-   # Add the host for the Server (if running locally, use localhost)
-   host=172.17.0.1
-   # Save and exit
-```
-### IDE Option: 
-1. Open the project in your favorite IDE
-2. Navigate to the `populate_mysql_db.sh` file
-3. Change the host (line 8) to the `172.17.0.1.` If running locally, use `localhost`
-4. Commit the changes and push to the repository.
-5. Pull the changes on the build server.
+Before proceeding, make sure you updated the hostname in the load script.
 
 ## File Setup LINUX (BUILD SERVER)
 ```

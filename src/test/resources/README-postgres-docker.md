@@ -1,4 +1,6 @@
 # LINUX INSTRUCTIONS 
+## Pre-requisites
+Before proceeding, make sure you updated the PGHOST in the load script.
 
 ## File Setup LINUX (BUILD SERVER)
 ```
@@ -15,10 +17,7 @@
 
 
 2. Build Server
-   1. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command: </br> `docker inspect <container name or id> | grep "IPAddress"`
-      1. If you're running this locally, you will use `localhost` as the host. 
 ```
-   # export PGHOST=172.17.0.1
    export dir=/wci/data/
    cd $dir
    docker run -it -v "$dir":/data postgres:12.15 /bin/bash
@@ -32,10 +31,7 @@
 `docker run --name snomed-postgres -p 5432:5432 -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=snomed -d --rm postgres:13.11`
 
 2. Build Server
-   1. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command:</br> `docker inspect <container name or id> | grep "IPAddress"`
-      1. If you're running this locally, you will use `localhost` as the host. 
 ```
-   # export PGHOST=172.17.0.1
    export dir=/wci/data/
    cd $dir
    docker run -it -v "$dir":/data postgres:13.11 /bin/bash
@@ -50,10 +46,7 @@
 
 
 2. Build Server
-   1. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command: </br> `docker inspect <container name or id> | grep "IPAddress"`
-      1. If you're running this locally, you will use `localhost` as the host. 
 ```
-   # export PGHOST=172.17.0.1
    export dir=/wci/data/
    cd $dir
    docker run -it -v "$dir":/data postgres:14.8 /bin/bash
@@ -68,8 +61,6 @@
 
 
 2. Build Server
-   1. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command: </br> `docker inspect <container name or id> | grep "IPAddress"`
-      1. If you're running this locally, you will use `localhost` as the host.
 ```
    # export PGHOST=172.17.0.1
    export dir=/wci/data/

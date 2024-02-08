@@ -13,24 +13,6 @@
  credentials for image to download.
 
 # Linux Instructions (BUILD SERVER)
-## Update Hostname (if necessary)
-You may need to update the hostname in the load script. In the script is a placeholder that you can
-uncomment.
-
-### Terminal Option:
-```
-    cd /wci/projects/SNOMED-DB-Load-Scripts
-    vim rf2/populate_oracle_db.sh
-    
-    # Remove the `#` from the `export ORACLE_HOME=` line
-    # Save and exit
-```
-### IDE Option:
-1. Open the project in your favorite IDE
-2. Navigate to the `populate_oracle_db.sh` file
-3. Uncomment the line 10
-4. Commit the changes and push to the repository.
-5. Be sure to pull the changes on the build server.
 
 ## File Setup
 ```
