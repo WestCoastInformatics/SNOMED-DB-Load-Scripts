@@ -26,19 +26,3 @@ find . -name "*txt" |\
    print if /sct2_Identifier|sct2_Relationship(ConcreteValues)?_|Refset_OWLExpression/; \
    print if /sct2_StatedRelationship|sct2_TextDefinition/' | wc -l
 ```
-
-# PLACEHOLDER
-* the below code is the same as the above, but with contains TransitiveClosure, which doesn't add anything to the count
-
-```
-find . -name "*txt" |\
-perl -ne 'print if /Refset_Association|AttributeValue|Refset_SimpleSn/; \
-  print if /Refset_Language|Refset_ExtendedMap|Refset_SimpleMap/; \
-  print if /Refset_RefsetDescriptor|Refset_DescriptionType/; \
-  print if /Refset_MRCMAttributeDomain|Refset_MRCMModuleScope/; \
-  print if /Refset_MRCMAttributeRange|Refset_ModuleDependency/; \
-  print if /Refset_MRCMDomain|sct2_Concept|sct2_Description/; \
-  print if /sct2_Identifier|sct2_Relationship(ConcreteValues)?_|Refset_OWLExpression/; \
-  print if /sct2_StatedRelationship|sct2_TextDefinition/; \
-  print if /sct2_TransitiveClosure/' | wc -l
-```

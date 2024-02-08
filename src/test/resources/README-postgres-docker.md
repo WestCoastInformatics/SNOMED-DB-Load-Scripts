@@ -2,10 +2,9 @@
 
 ## File Setup LINUX (BUILD SERVER)
 ```
-cd /wci/data
-unzip -o /wci/projects/SNOMED-CT-Transitive-Closure/target/snomed-transitive-closure-postgres.*.zip
-unzip -o /wci/projects/SNOMED-DB-Load-Scripts/target/snomed-db-scripts-postgres.*.zip
-sudo chmod +x rf2/populate_postgres_db.sh
+   cd /wci/data
+   unzip -o /wci/projects/SNOMED-DB-Load-Scripts/target/snomed-db-scripts-postgres.*.zip
+   sudo chmod +x rf2/populate_postgres_db.sh
 ```
 
 * For testing postgres, run a docker postgres instance - https://hub.docker.com/_/postgres
@@ -19,13 +18,13 @@ sudo chmod +x rf2/populate_postgres_db.sh
    1. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command: </br> `docker inspect <container name or id> | grep "IPAddress"`
       1. If you're running this locally, you will use `localhost` as the host. 
 ```
-export PGHOST=172.17.0.1
-export dir=/wci/data/
-cd $dir
-docker run -it -v "$dir":/data postgres:12.15 /bin/bash
-
-root@842bfb3da1f1:/# cd /data/rf2
-root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
+   # export PGHOST=172.17.0.1
+   export dir=/wci/data/
+   cd $dir
+   docker run -it -v "$dir":/data postgres:12.15 /bin/bash
+   
+   root@842bfb3da1f1:/# cd /data/rf2
+   root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
 ```
 
 ### Postgres 13.11 
@@ -36,13 +35,13 @@ root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
    1. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command:</br> `docker inspect <container name or id> | grep "IPAddress"`
       1. If you're running this locally, you will use `localhost` as the host. 
 ```
-# export PGHOST=172.17.0.1
-export dir=/wci/data/
-cd $dir
-docker run -it -v "$dir":/data postgres:13.11 /bin/bash
-
-root@842bfb3da1f1:/# cd /data/rf2
-root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
+   # export PGHOST=172.17.0.1
+   export dir=/wci/data/
+   cd $dir
+   docker run -it -v "$dir":/data postgres:13.11 /bin/bash
+   
+   root@842bfb3da1f1:/# cd /data/rf2
+   root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
 ```
 
 ### Postgres 14.8 
@@ -54,13 +53,13 @@ root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
    1. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command: </br> `docker inspect <container name or id> | grep "IPAddress"`
       1. If you're running this locally, you will use `localhost` as the host. 
 ```
-export PGHOST=172.17.0.1
-export dir=/wci/data/
-cd $dir
-docker run -it -v "$dir":/data postgres:14.8 /bin/bash
-
-root@842bfb3da1f1:/# cd /data/rf2
-root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
+   # export PGHOST=172.17.0.1
+   export dir=/wci/data/
+   cd $dir
+   docker run -it -v "$dir":/data postgres:14.8 /bin/bash
+   
+   root@842bfb3da1f1:/# cd /data/rf2
+   root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
 ```
 
 ### Postgres 15.3 
@@ -72,13 +71,13 @@ root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
    1. Make sure to edit the host setting before proceeding. To find the docker container's IP address, run the following command: </br> `docker inspect <container name or id> | grep "IPAddress"`
       1. If you're running this locally, you will use `localhost` as the host.
 ```
-export PGHOST=172.17.0.1
-export dir=/wci/data/
-cd $dir
-docker run -it -v "$dir":/data postgres:15.3 /bin/bash
-
-root@842bfb3da1f1:/# cd /data/rf2
-root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
+   # export PGHOST=172.17.0.1
+   export dir=/wci/data/
+   cd $dir
+   docker run -it -v "$dir":/data postgres:15.3 /bin/bash
+   
+   root@842bfb3da1f1:/# cd /data/rf2
+   root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
 ```
 
 # WINDOWS INSTRUCTIONS
@@ -104,11 +103,11 @@ root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
 
 2. WINDOWS git bash (to simulate running in Linux)
 ```
-export PGHOST=host.docker.internal  (**make sure to edit this setting before proceeding)
-dir=C:/data
-docker run -it -v "$dir":/data postgres:12.15 /bin/bash
-root@842bfb3da1f1:/# cd /data/SnomedCT_International
-root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
+   # export PGHOST=host.docker.internal  (**make sure to edit this setting before proceeding)
+   dir=C:/data
+   docker run -it -v "$dir":/data postgres:12.15 /bin/bash
+   root@842bfb3da1f1:/# cd /data/SnomedCT_International
+   root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
 ``` 
 
 ### Postgres 13.11 
@@ -118,11 +117,11 @@ root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
 
 2. git bash (to simulate running in Linux)
 ```
-export PGHOST=host.docker.internal  (**make sure to edit this setting before proceeding)
-dir=C:/data
-docker run -it -v "$dir":/data postgres:13.11 /bin/bash
-root@842bfb3da1f1:/# cd /data/SnomedCT_International
-root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
+   # export PGHOST=host.docker.internal  (**make sure to edit this setting before proceeding)
+   dir=C:/data
+   docker run -it -v "$dir":/data postgres:13.11 /bin/bash
+   root@842bfb3da1f1:/# cd /data/SnomedCT_International
+   root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
 ```
 
 ### Postgres 14.8 
@@ -132,11 +131,11 @@ root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
 
 2. git bash (to simulate running in Linux)
 ```
-export PGHOST=host.docker.internal  (**make sure to edit this setting before proceeding)
-dir=C:/data
-docker run -it -v "$dir":/data postgres:14.8 /bin/bash
-root@842bfb3da1f1:/# cd /data/SnomedCT_International
-root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
+   # export PGHOST=host.docker.internal  (**make sure to edit this setting before proceeding)
+   dir=C:/data
+   docker run -it -v "$dir":/data postgres:14.8 /bin/bash
+   root@842bfb3da1f1:/# cd /data/SnomedCT_International
+   root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
 ``` 
 
 ### Postgres 15.3 
@@ -146,9 +145,9 @@ root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
 
 2. git bash (to simulate running in Linux)
 ```
-export PGHOST=host.docker.internal  (**make sure to edit this setting before proceeding)
-dir=C:/data
-docker run -it -v "$dir":/data postgres:15.3 /bin/bash
-root@842bfb3da1f1:/# cd /data/SnomedCT_International
-root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
+   # export PGHOST=host.docker.internal  (**make sure to edit this setting before proceeding)
+   dir=C:/data
+   docker run -it -v "$dir":/data postgres:15.3 /bin/bash
+   root@842bfb3da1f1:/# cd /data/SnomedCT_International
+   root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
 ``` 

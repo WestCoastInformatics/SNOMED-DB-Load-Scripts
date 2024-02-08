@@ -12,6 +12,72 @@
 4. If running an Oracle Database Docker Container on Linux use docker login and enter your hub.docker.com
  credentials for image to download.
 
+# Linux Instructions (BUILD SERVER)
+## Update Hostname (if necessary)
+You may need to update the hostname in the load script. In the script is a placeholder that you can
+uncomment.
+
+### Terminal Option:
+```
+    cd /wci/projects/SNOMED-DB-Load-Scripts
+    vim rf2/populate_oracle_db.sh
+    
+    # Remove the `#` from the `export ORACLE_HOME=` line
+    # Save and exit
+```
+### IDE Option:
+1. Open the project in your favorite IDE
+2. Navigate to the `populate_oracle_db.sh` file
+3. Uncomment the line 10
+4. Commit the changes and push to the repository.
+5. Be sure to pull the changes on the build server.
+
+## File Setup
+```
+    cd /wci/data
+    unzip -o /wci/projects/SNOMED-DB-Load-Scripts/target/snomed-db-scripts-oracle.*.zip
+    sudo chmod +x rf2/populate_oracle_db.sh
+```
+
+## If not running Docker as root
+```
+    cd $dir/rf2
+    touch oracle.log concept.log description.log identifier.log relationship.log owlexpression.log statedrelationship.log textdefinition.log association.log attributevalue.log simple.log complexmap.log extendedmap.log simplemap.log language.log refsetdescriptor.log descriptiontype.log moduledependency.log relationshipconcretevalues.log
+    chmod a=rw oracle.log concept.log description.log identifier.log relationship.log owlexpression.log statedrelationship.log textdefinition.log association.log attributevalue.log simple.log complexmap.log extendedmap.log simplemap.log language.log refsetdescriptor.log descriptiontype.log moduledependency.log relationshipconcretevalues.log
+```
+
+## Launch the container
+Create log files and allow read/write to all users.
+```
+    export dir=/wci/data/
+    cd $dir
+    
+    #For store/oracle/database-enterprise:12.2.0.1-slim
+    sudo docker run --name snomed-oracle -v $dir:/data -d --rm -p 8080:8080 -p 1521:1521 store/oracle/database-enterprise:12.2.0.1-slim
+    
+    #For container-registry.oracle.com/database/enterprise:12.1.0.2
+    sudo docker run --name snomed-oracle -v $dir:/data -d --rm -p 8080:8080 -p 1521:1521  container-registry.oracle.com/database/enterprise:12.1.0.2
+```
+## Populate DB
+
+1. Launch the container
+
+`sudo docker exec -it snomed-oracle /bin/bash`
+
+2. Populate the database
+```
+    root@842bfb3da1f1:/# . /home/oracle/.bashrc
+    root@842bfb3da1f1:/# sqlplus sys/Oradoc_db1 as sysdba
+    alter session set "_ORACLE_SCRIPT"=true;
+    create user snomed identified by snomed;
+    GRANT CONNECT, RESOURCE, DBA TO snomed;
+    exit
+    
+    root@842bfb3da1f1:/# cd /data/rf2
+    root@842bfb3da1f1:/data/rf2# ./populate_oracle_db.sh
+```
+
+# Windows Instructions
 
 ## File Setup WINDOWS
 
@@ -23,40 +89,12 @@
 3. Open the `target/snomed-db-scripts-oracle.zip` file
 4. Copy the contents of the `rf2` directory to the folder where SNOMED data is unpacked (see above)
 
-## File Setup LINUX (BUILD SERVER)
-```
-cd /wci/data
-unzip -o /wci/projects/SNOMED-DB-Load-Scripts/target/snomed-db-scripts-oracle.*.zip
-sudo chmod +x rf2/populate_oracle_db.sh
-```
-
 ## Launch the container WINDOWS
 ```
-dir=C:/data
-cd %dir%
-docker run --name snomed-oracle -v %dir%:/data -d --rm -p 8080:8080 -p 1521:1521 store/oracle/database-enterprise:12.2.0.1-slim
+    dir=C:/data
+    cd %dir%
+    docker run --name snomed-oracle -v %dir%:/data -d --rm -p 8080:8080 -p 1521:1521 store/oracle/database-enterprise:12.2.0.1-slim
 ```
-
-## If not running Docker as root LINUX (BUILD SERVER)
-```
-cd $dir/rf2
-touch oracle.log concept.log description.log identifier.log relationship.log owlexpression.log statedrelationship.log textdefinition.log association.log attributevalue.log simple.log complexmap.log extendedmap.log simplemap.log language.log refsetdescriptor.log descriptiontype.log moduledependency.log relationshipconcretevalues.log
-chmod a=rw oracle.log concept.log description.log identifier.log relationship.log owlexpression.log statedrelationship.log textdefinition.log association.log attributevalue.log simple.log complexmap.log extendedmap.log simplemap.log language.log refsetdescriptor.log descriptiontype.log moduledependency.log relationshipconcretevalues.log
-```
-
-## Create log files and allow read/write to all users.
-1. Launch the container LINUX (BUILD SERVER)
-```
-export dir=/wci/data/
-cd $dir
-
-#For store/oracle/database-enterprise:12.2.0.1-slim
-sudo docker run --name snomed-oracle -v $dir:/data -d --rm -p 8080:8080 -p 1521:1521 store/oracle/database-enterprise:12.2.0.1-slim
-
-#For container-registry.oracle.com/database/enterprise:12.1.0.2
-sudo docker run --name snomed-oracle -v $dir:/data -d --rm -p 8080:8080 -p 1521:1521  container-registry.oracle.com/database/enterprise:12.1.0.2
-```
-
 ## Populate DB
 
 1. Launch the container
@@ -64,23 +102,13 @@ sudo docker run --name snomed-oracle -v $dir:/data -d --rm -p 8080:8080 -p 1521:
 `sudo docker exec -it snomed-oracle /bin/bash`
 2. Populate the database
 ```
-root@842bfb3da1f1:/# . /home/oracle/.bashrc
-root@842bfb3da1f1:/# sqlplus sys/Oradoc_db1 as sysdba
-alter session set "_ORACLE_SCRIPT"=true;
-create user snomed identified by snomed;
-GRANT CONNECT, RESOURCE, DBA TO snomed;
-exit
-
-root@842bfb3da1f1:/# cd /data/rf2
-root@842bfb3da1f1:/data/rf2# ./populate_oracle_db.sh
+    root@842bfb3da1f1:/# . /home/oracle/.bashrc
+    root@842bfb3da1f1:/# sqlplus sys/Oradoc_db1 as sysdba
+    alter session set "_ORACLE_SCRIPT"=true;
+    create user snomed identified by snomed;
+    GRANT CONNECT, RESOURCE, DBA TO snomed;
+    exit
+    
+    root@842bfb3da1f1:/# cd /data/rf2
+    root@842bfb3da1f1:/data/rf2# ./populate_oracle_db.sh
 ```
-
-## Connect to Oracle database to query tables
-1. Skip docker exec command if still connected from prior step
-
-```
-sudo docker exec -it snomed-oracle /bin/bash
-root@842bfb3da1f1:/# . /home/oracle/.bashrc
-root@842bfb3da1f1:/# sqlplus snomed/snomed@ORCLCDB
-```
-
