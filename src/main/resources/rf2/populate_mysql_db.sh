@@ -5,7 +5,7 @@
 # Please edit these variables to reflect your environment
 #   - Tested with docker mysql 5.6, 5.7, 8.0 (using docker mysql server and client)
 #     - host=host.docker.internal
-host=172.17.0.2
+host=
 user=root
 password=admin
 db_name=snomed

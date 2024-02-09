@@ -62,7 +62,6 @@ Before proceeding, make sure you updated the PGHOST in the load script.
 
 2. Build Server
 ```
-   # export PGHOST=172.17.0.1
    export dir=/wci/data/
    cd $dir
    docker run -it -v "$dir":/data postgres:15.3 /bin/bash
