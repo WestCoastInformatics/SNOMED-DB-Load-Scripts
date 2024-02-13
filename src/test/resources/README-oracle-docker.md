@@ -1,4 +1,4 @@
-# Oracle 12c
+# Oracle 12c BUILD INSTRUCTIONS
 ## Prerequisites
 1. Log into DockerHub and agree to Oracle's Terms of Service
    - https://hub.docker.com/_/oracle-database-enterprise-edition?tab=description (Click "Proceed to checkout")
@@ -12,7 +12,7 @@
 4. If running an Oracle Database Docker Container on Linux use docker login and enter your hub.docker.com
  credentials for image to download.
 
-# Linux Instructions (BUILD SERVER)
+# Linux Instructions
 
 ## File Setup
 ```
@@ -46,42 +46,6 @@ Create log files and allow read/write to all users.
 
 `sudo docker exec -it snomed-oracle /bin/bash`
 
-2. Populate the database
-```
-    root@842bfb3da1f1:/# . /home/oracle/.bashrc
-    root@842bfb3da1f1:/# sqlplus sys/Oradoc_db1 as sysdba
-    alter session set "_ORACLE_SCRIPT"=true;
-    create user snomed identified by snomed;
-    GRANT CONNECT, RESOURCE, DBA TO snomed;
-    exit
-    
-    root@842bfb3da1f1:/# cd /data/rf2
-    root@842bfb3da1f1:/data/rf2# ./populate_oracle_db.sh
-```
-
-# Windows Instructions
-
-## File Setup WINDOWS
-
-1. Download the SNOMED distribution from NLM
-   1. Unpack to `c:/data/SnomedCT_International` (for international edition)
-   2. Unpack to `c:/data/SnomedCT_US` (for US edition)
-2. Clone and build the project
-    1. `git@github.com:WestCoastInformatics/SNOMED-DB-Load-Scripts.git`
-3. Open the `target/snomed-db-scripts-oracle.zip` file
-4. Copy the contents of the `rf2` directory to the folder where SNOMED data is unpacked (see above)
-
-## Launch the container WINDOWS
-```
-    dir=C:/data
-    cd %dir%
-    docker run --name snomed-oracle -v %dir%:/data -d --rm -p 8080:8080 -p 1521:1521 store/oracle/database-enterprise:12.2.0.1-slim
-```
-## Populate DB
-
-1. Launch the container
-
-`sudo docker exec -it snomed-oracle /bin/bash`
 2. Populate the database
 ```
     root@842bfb3da1f1:/# . /home/oracle/.bashrc
