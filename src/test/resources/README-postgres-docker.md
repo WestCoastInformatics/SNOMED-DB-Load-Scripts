@@ -7,6 +7,7 @@ Before proceeding, make sure you updated the PGHOST in the load script.
    cd /wci/data
    unzip -o /wci/projects/SNOMED-DB-Load-Scripts/target/snomed-db-scripts-postgres.*.zip
    sudo chmod +x rf2/populate_postgres_db.sh
+   sudo chmod +x rf2/compute_transitive_closure.pl
 ```
 
 * For testing postgres, run a docker postgres instance - https://hub.docker.com/_/postgres

@@ -6,8 +6,11 @@ Before proceeding, make sure you updated the hostname in the load script.
 ```
    cd /wci/data
    unzip -o /wci/projects/SNOMED-DB-Load-Scripts/target/snomed-db-scripts-mysql.*.zip
+
    sudo chmod +x rf2/populate_mysql_db.sh
+   sudo chmod +x rf2/compute_transitive_closure.pl
 ```
+Follow the instructions for the version you are using below.
 
 ### MySQL 5.7 [SUPPORT TO BE DEPRECATED SOON]
 1. For testing mysql, run a docker mysql instance - https://hub.docker.com/_/mysql

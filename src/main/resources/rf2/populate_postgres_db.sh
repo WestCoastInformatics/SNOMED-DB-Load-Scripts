@@ -14,44 +14,49 @@ ef=0
 
 echo "See postgres.log for output"
 
-echo "----------------------------------------" >> postgres.log 2>&1
-echo "Starting ... `/bin/date`" >> postgres.log 2>&1
-echo "----------------------------------------" >> postgres.log 2>&1
-echo "user =       $PGUSER" >> postgres.log 2>&1
-echo "db_name =    $PGDATABASE" >> postgres.log 2>&1
+echo "----------------------------------------" | tee -a postgres.log
+echo "Starting ... `/bin/date`" | tee -a postgres.log
+echo "----------------------------------------" | tee -a postgres.log
+echo "user =       $PGUSER" | tee -a postgres.log
+echo "db_name =    $PGDATABASE" | tee -a postgres.log
 
 DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-echo "    Compute transitive closure relationship file ... `/bin/date`" >> postgres.log 2>&1
+echo "    Compute transitive closure relationship file ... `/bin/date`" | tee -a postgres.log
 relFile=$DIR/Snapshot/Terminology/*_Relationship_Snapshot_*.txt
-$DIR/compute_transitive_closure.pl --force --noself $relFile >> postgres.log 2>&1
+if [[ ! -e "$DIR/compute_transitive_closure.pl --force --noself $relFile" ]] >> mysql.log 2>&1; then
+  echo "    TC file created successfully" | tee -a mysql.log
+  else
+    echo "    ERROR: failed to compute TC relationship file. See mysql.log for more details."
+    exit 1
+fi
 if [ $? -ne 0 ]; then ef=1; fi
 
-echo "    Create and load tables ... `/bin/date`" >> postgres.log 2>&1
+echo "    Create and load tables ... `/bin/date`" | tee -a postgres.log
 psql < psql_tables.sql >> postgres.log 2>&1
 if [ $? -ne 0 ]; then ef=1; fi
 
 if [ $ef -ne 1 ]; then
-echo "    Create indexes ... `/bin/date`" >> postgres.log 2>&1
+echo "    Create indexes ... `/bin/date`" | tee -a postgres.log
 psql < psql_indexes.sql >> postgres.log 2>&1
 if [ $? -ne 0 ]; then ef=1; fi
 fi
 
 if [ $ef -ne 1 ]; then
-echo "    Create views ... `/bin/date`" >> postgres.log 2>&1
+echo "    Create views ... `/bin/date`" | tee -a postgres.log
 psql < psql_views.sql >> postgres.log 2>&1
 if [ $? -ne 0 ]; then ef=1; fi
 fi
 
-echo "----------------------------------------" >> postgres.log 2>&1
+echo "----------------------------------------" | tee -a postgres.log
 if [ $ef -eq 1 ]
 then
-  echo "There were one or more errors." >> postgres.log 2>&1
+  echo "There were one or more errors." | tee -a postgres.log
   retval=-1
 else
-  echo "Completed without errors." >> postgres.log 2>&1
+  echo "Completed without errors." | tee -a postgres.log
   retval=0
 fi
-echo "Finished ... `/bin/date`" >> postgres.log 2>&1
-echo "----------------------------------------" >> postgres.log 2>&1
+echo "Finished ... `/bin/date`" | tee -a postgres.log
+echo "----------------------------------------" | tee -a postgres.log
 exit $retval

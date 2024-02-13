@@ -1,7 +1,10 @@
 # Check Files
 With a new download of SNOMED international edition or US edition, check that the file list still matches what we are loading.
 
-## Look for extra files (this should return zero rows)
+## Look for extra files
+- International Edition will return a 2, but these two files only contain 1 header file
+- US Edition should return 0
+
 ```
 find . -name "*txt" | grep -v Refset_Association | grep -v Refset_AttributeValue | grep -v Refset_SimpleSn |\
   grep -v Refset_Language | grep -v Refset_ExtendedMap | grep -v Refset_SimpleMap |\
@@ -14,7 +17,8 @@ find . -name "*txt" | grep -v Refset_Association | grep -v Refset_AttributeValue
   grep -v sct2_RelationshipConcreteValues |  wc -l
 ```
 
-## Look that all files are there (this should equal 21)
+## Look that all files are there
+- Both editions should return 21
 ```
 find . -name "*txt" |\
  perl -ne 'print if /Refset_Association|AttributeValue|Refset_SimpleSn/; \
