@@ -2,12 +2,9 @@
 
 #
 # Database connection parameters
-# Please edit these variables to reflect your environment
-#   - Tested on Windows with "Git Bash" as a shell
-#
-
 # Set if necessary
 #export ORACLE_HOME=/app/oracle/product/12.1.0/dbhome_1
+# Please edit these variables to reflect your environment
 user=snomed
 password=snomed
 tns_name=ORCLCDB
@@ -26,6 +23,14 @@ echo "----------------------------------------" >> oracle.log 2>&1
 echo "ORACLE_HOME = $ORACLE_HOME" >> oracle.log 2>&1
 echo "user =        $user" >> oracle.log 2>&1
 echo "tns_name =    $tns_name" >> oracle.log 2>&1
+
+
+DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+echo "    Compute transitive closure relationship file ... `/bin/date`" >> oracle.log 2>&1
+relFile=$DIR/Snapshot/Terminology/*_Relationship_Snapshot_*.txt
+$DIR/compute_transitive_closure.pl --force --noself $relFile >> oracle.log 2>&1
+if [ $? -ne 0 ]; then ef=1; fi
 
 echo "    Create tables ... `/bin/date`" >> oracle.log 2>&1
 echo "@oracle_tables.sql" |  $ORACLE_HOME/bin/sqlplus $user/$password@$tns_name  >> oracle.log 2>&1

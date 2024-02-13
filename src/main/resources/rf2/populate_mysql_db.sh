@@ -1,11 +1,8 @@
 #!/bin/bash -f
 #
 # Database connection parameters
-# NOTE: or MySQL 8.0, you'll need to run the server with local_infile=ON
 # Please edit these variables to reflect your environment
-#   - Tested with docker mysql 5.6, 5.7, 8.0 (using docker mysql server and client)
-#     - host=host.docker.internal
-host=
+host=[set host name]
 user=root
 password=admin
 db_name=snomed
@@ -29,6 +26,14 @@ fi
 if [ "${host}" != "" ]; then
   host="-h ${host}"
 fi
+
+DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+echo "    Compute transitive closure relationship file ... `/bin/date`" >> mysql.log 2>&1
+relFile=$DIR/Snapshot/Terminology/*_Relationship_Snapshot_*.txt
+$DIR/compute_transitive_closure.pl --force --noself $relFile >> mysql.log 2>&1
+if [ $? -ne 0 ]; then ef=1; fi
+
 
 echo "    Create and load tables ... `/bin/date`" >> mysql.log 2>&1
 mysql -vvv $host -u $user $password --local-infile $db_name < mysql_tables.sql >> mysql.log 2>&1

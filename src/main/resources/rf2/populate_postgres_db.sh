@@ -3,11 +3,6 @@
 #
 # Database connection parameters
 # Please edit these variables to reflect your environment
-#   - Tested with docker postgres 10, 11, 12, 13 (using docker postgres server and client)
-#     - PGHOST=host.docker.internal
-#   - Tested on Windows with "Git Bash" as a shell
-#   - and psql in the path
-#
 export PGHOST=localhost
 export PGUSER=postgres
 export PGPASSWORD=
@@ -24,6 +19,13 @@ echo "Starting ... `/bin/date`" >> postgres.log 2>&1
 echo "----------------------------------------" >> postgres.log 2>&1
 echo "user =       $PGUSER" >> postgres.log 2>&1
 echo "db_name =    $PGDATABASE" >> postgres.log 2>&1
+
+DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+echo "    Compute transitive closure relationship file ... `/bin/date`" >> postgres.log 2>&1
+relFile=$DIR/Snapshot/Terminology/*_Relationship_Snapshot_*.txt
+$DIR/compute_transitive_closure.pl --force --noself $relFile >> postgres.log 2>&1
+if [ $? -ne 0 ]; then ef=1; fi
 
 echo "    Create and load tables ... `/bin/date`" >> postgres.log 2>&1
 psql < psql_tables.sql >> postgres.log 2>&1
