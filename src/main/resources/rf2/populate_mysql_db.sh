@@ -2,7 +2,7 @@
 #
 # Database connection parameters
 # Please edit these variables to reflect your environment
-host=172.17.0.2
+host=172.17.0.3
 user=root
 password=admin
 db_name=snomed
@@ -31,14 +31,8 @@ DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 echo "    Compute transitive closure relationship file ... `/bin/date`" | tee -a mysql.log
 relFile=$DIR/Snapshot/Terminology/*_Relationship_Snapshot_*.txt
-if [[ ! -e "$DIR/compute_transitive_closure.pl --force --noself $relFile" ]] >> mysql.log 2>&1; then
-  echo "    TC file created successfully" | tee -a mysql.log
-  else
-    echo "    ERROR: failed to compute TC relationship file. See mysql.log for more details."
-    exit 1
-fi
+python $DIR/compute_transitive_closure.py --force --noself $relFile >> mysql.log 2>&1
 if [ $? -ne 0 ]; then ef=1; fi
-
 
 echo "    Create and load tables ... `/bin/date`" | tee -a mysql.log
 mysql -vvv $host -u $user $password --local-infile $db_name < mysql_tables.sql >> mysql.log 2>&1
