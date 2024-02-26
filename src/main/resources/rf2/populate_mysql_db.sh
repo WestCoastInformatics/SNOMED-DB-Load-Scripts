@@ -2,7 +2,7 @@
 #
 # Database connection parameters
 # Please edit these variables to reflect your environment
-host=172.17.0.3
+host=172.17.0.2
 user=root
 password=admin
 db_name=snomed
@@ -31,7 +31,20 @@ DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 echo "    Compute transitive closure relationship file ... `/bin/date`" | tee -a mysql.log
 relFile=$DIR/Snapshot/Terminology/*_Relationship_Snapshot_*.txt
-python $DIR/compute_transitive_closure.py --force --noself $relFile >> mysql.log 2>&1
+#check if system has python or perl, run the corresponding script
+if command -v python3 &> /dev/null
+then
+  echo "python3 found, running python script" >> mysql.log 2>&1
+  python $DIR/compute_transitive_closure.py --force --noself $relFile >> mysql.log 2>&1
+elif command -v perl &> /dev/null
+then
+  echo "perl found, running perl script" >> mysql.log 2>&1
+  $DIR/compute_transitive_closure.pl --force --noself $relFile >> mysql.log 2>&1
+# if none are present,
+else
+  echo "No python3 or perl found. Please install one of them." | tee -a mysql.log
+  ef=1
+fi
 if [ $? -ne 0 ]; then ef=1; fi
 
 echo "    Create and load tables ... `/bin/date`" | tee -a mysql.log

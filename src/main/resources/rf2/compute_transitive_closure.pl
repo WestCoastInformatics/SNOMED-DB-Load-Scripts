@@ -213,30 +213,36 @@ sub PrintHelp {
 sub initRelationships {
     my($relsFile, $historyFile) = @_;
     my $IN;
-    open ($IN, "<$relsFile") || die "Failed to open $relsFile: $! $?\n";
-    my $ct = 1;
-    # iterate through rels file
-    while (<$IN>) {
-        chop;
-        if (/\r$/) {
-          s/\r//;
-          $eol = "\r\n";
-        }
-        my ($id, $effectiveTime, $active, $moduleId, $sourceId, $destinationId,
-            $relationshipGroup, $typeId, $characteristicTypeId, $modifierId) = split /\t/;
 
-        # skip inactive or non-isa rels
-        next unless $typeId eq $isaRel;
-        next unless $active;
-        $ct++;
+    # expand the wildcard chars in $relsFile
+    my @files = glob($relsFile);
+    # iterate through files
+    foreach my $file (@files) {
+        open ($IN, "<$file") || die "Failed to open $file: $! $?\n";
+        my $ct = 1;
+            # iterate through rels file
+            while (<$IN>) {
+                chop;
+                if (/\r$/) {
+                  s/\r//;
+                  $eol = "\r\n";
+                }
+                my ($id, $effectiveTime, $active, $moduleId, $sourceId, $destinationId,
+                    $relationshipGroup, $typeId, $characteristicTypeId, $modifierId) = split /\t/;
 
-        # push new child for parent
-        push @{$parChd{$destinationId}}, $sourceId;
-        $codes{$sourceId} = 1;
-        $codes{$destinationId} = 1;
+                # skip inactive or non-isa rels
+                next unless $typeId eq $isaRel;
+                next unless $active;
+                $ct++;
+
+                # push new child for parent
+                push @{$parChd{$destinationId}}, $sourceId;
+                $codes{$sourceId} = 1;
+                $codes{$destinationId} = 1;
+            }
+            print "      $ct relationships loaded\n";
+            close($IN);
     }
-    print "      $ct relationships loaded\n";
-    close($IN);
 
     # Load appropriate history relationships
     if ($history) {
