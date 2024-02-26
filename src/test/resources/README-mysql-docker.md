@@ -12,27 +12,6 @@ Before proceeding, make sure you updated the hostname in the load script.
 ```
 Follow the instructions for the version you are using below.
 
-### MySQL 5.7 [SUPPORT TO BE DEPRECATED SOON]
-1. For testing mysql, run a docker mysql instance - https://hub.docker.com/_/mysql
-
-
-2. Launch the container </br>
-`docker run --name snomed-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=snomed -d --rm mysql:5.7`
-
-
-3. Build Server
-
-```
-   export dir=/wci/data/
-   cd $dir
-   docker run -it -v $dir:/data mysql:5.7 /bin/bash
-   
-   root@842bfb3da1f1:/# cd /data/rf2
-   root@842bfb3da1f1:/data/rf2# ./populate_mysql_db.sh
-   root@842bfb3da1f1:/data/rf2# tail -f mysql.log
-
-```
-
 ### MySQL 8.0
 
 1. Launch the container </br>
@@ -44,6 +23,22 @@ Follow the instructions for the version you are using below.
    export dir=/wci/data/
    cd $dir
    docker run -it -v $dir:/data mysql:8.0 /bin/bash
+   
+   root@842bfb3da1f1:/# cd /data/rf2
+   root@842bfb3da1f1:/data/rf2# ./populate_mysql_db.sh
+```
+
+### MySQL 8.3
+
+1. Launch the container </br>
+   `docker run --name snomed-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=snomed -d --rm mysql:8.3 --local_infile=ON`
+
+
+2. Build Server
+```
+   export dir=/wci/data/
+   cd $dir
+   docker run -it -v $dir:/data mysql:8.3 /bin/bash
    
    root@842bfb3da1f1:/# cd /data/rf2
    root@842bfb3da1f1:/data/rf2# ./populate_mysql_db.sh
