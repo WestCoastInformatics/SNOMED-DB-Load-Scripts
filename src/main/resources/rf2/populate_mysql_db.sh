@@ -2,7 +2,7 @@
 #
 # Database connection parameters
 # Please edit these variables to reflect your environment
-host=172.17.0.3
+host=[Change to your host]
 user=root
 password=admin
 db_name=snomed
