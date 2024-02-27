@@ -1,8 +1,12 @@
 # Oracle 12c BUILD INSTRUCTIONS
 ## Prerequisites
 1. Log into DockerHub and agree to Oracle's Terms of Service
-   - https://hub.docker.com/_/oracle-database-enterprise-edition?tab=description (Click "Proceed to checkout")
-
+   - [Oracle DB Enterprise Repository](https://container-registry.oracle.com/ords/f?p=113:1:103153009327673::::FSP_LANGUAGE_PREFERENCE:&cs=3vvrLolDIFGAxz-ReKVoNrPBwhCCJtGRffMagNzTnvafG3AeKT2KLWKQSclqKpS-c6TF2uprvjENxXOETZOmgfQ)
+     - Log in with your account and then click on "Continue" on the line enterprise. This will allow you to pull the Oracle Database Enterprise Edition image from the Oracle Container Registry.
+   - Pull the image from the Oracle Container Registry
+     - `docker login container-registry.oracle.com` and enter your hub.docker.com credentials
+     - `docker pull container-registry.oracle.com/database/enterprise:12.2.0.1-slim`
+     - `docker pull container-registry.oracle.com/database/enterprise:12.1.0.2`
 2. For testing oracle, run a docker oracle instance
    - https://dzone.com/articles/oracle-12c-image-installation-in-docker
 
@@ -37,7 +41,7 @@ Create log files and allow read/write to all users.
     cd $dir
     
     #For store/oracle/database-enterprise:12.2.0.1-slim
-    sudo docker run --name snomed-oracle -v $dir:/data -d --rm -p 8080:8080 -p 1521:1521 store/oracle/database-enterprise:12.2.0.1-slim
+    sudo docker run --name snomed-oracle -v $dir:/data -d --rm -p 8080:8080 -p 1521:1521 container-registry.oracle.com/database/enterprise:12.2.0.1-slim
     
     #For container-registry.oracle.com/database/enterprise:12.1.0.2
     sudo docker run --name snomed-oracle -v $dir:/data -d --rm -p 8080:8080 -p 1521:1521  container-registry.oracle.com/database/enterprise:12.1.0.2

@@ -23,7 +23,7 @@ echo "db_name =    $PGDATABASE" | tee -a postgres.log
 DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 echo "    Compute transitive closure relationship file ... `/bin/date`" | tee -a postgres.log
-relFile=$DIR/Snapshot/Terminology/*_Relationship_Snapshot_*.txt
+relFile=$(find $DIR/Snapshot/Terminology/ -name "*_Relationship_Snapshot_*.txt" -print -quit)
 $DIR/compute_transitive_closure.pl --force --noself $relFile >> postgres.log 2>&1
 if [ $? -ne 0 ]; then ef=1; fi
 
