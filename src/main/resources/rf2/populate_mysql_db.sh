@@ -32,17 +32,17 @@ DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 echo "    Compute transitive closure relationship file ... `/bin/date`" | tee -a mysql.log
 relFile=$DIR/Snapshot/Terminology/*_Relationship_Snapshot_*.txt
 #check if system has python or perl, run the corresponding script
-if command -v python3 &> /dev/null
+if command -v python &> /dev/null
 then
   echo "python3 found, running python script" >> mysql.log 2>&1
   python $DIR/compute_transitive_closure.py --force --noself $relFile >> mysql.log 2>&1
 elif command -v perl &> /dev/null
 then
   echo "perl found, running perl script" >> mysql.log 2>&1
-  $DIR/compute_transitive_closure.pl --force --noself $relFile >> mysql.log 2>&1
-# if none are present,
+  perl $DIR/compute_transitive_closure.pl --force --noself $relFile >> mysql.log 2>&1
+# if none are present, print error message
 else
-  echo "No python3 or perl found. Please install one of them." | tee -a mysql.log
+  echo "No python or perl found. Please install one of them." | tee -a mysql.log
   ef=1
 fi
 if [ $? -ne 0 ]; then ef=1; fi
