@@ -3,7 +3,7 @@
 #
 # Database connection parameters
 # Please edit these variables to reflect your environment
-export PGHOST=172.17.0.1
+export PGHOST=[update with your host]
 export PGUSER=postgres
 export PGPASSWORD=
 export PGDATABASE=snomed
