@@ -5,7 +5,7 @@
 -- SNOMED International Jan 1:
 
 Is it August already?! Announcing #SNOMEDCT DB load and transitive
-closure scripts for the 20240101 International Edition! Out-of-the-box
+closure scripts for the 20240201 International Edition! Out-of-the-box
 support for #Postgres, #Oracle, #MySQL, and #MariaDB.
 #MakingTerminologyEasy #MakingSnomedEasy #snomed
 https://www.westcoastinformatics.com/products/db-load-scripts
