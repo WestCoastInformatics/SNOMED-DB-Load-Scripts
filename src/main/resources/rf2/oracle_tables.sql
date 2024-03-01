@@ -448,16 +448,15 @@ CREATE TABLE moduledependency
 
 -- Transitive closure table
 EXECUTE drop_table('transitiveclosure');
-CREATE TABLE transitiveclosure
-(
+CREATE TABLE transitiveclosure (
     superTypeId NUMERIC(20) NOT NULL,
-    subTypeId   NUMERIC(20) NOT NULL,
-    depth       INTEGER     NOT NULL,
+    subTypeId NUMERIC(20) NOT NULL,
+    depth INTEGER NOT NULL,
     PRIMARY KEY (superTypeId, subTypeId),
-    FOREIGN KEY (superTypeId) REFERENCES concept (id),
-    FOREIGN KEY (subTypeId) REFERENCES concept (id)
-) PCTFREE 10 PCTUSED 80;
-
+    FOREIGN KEY (superTypeId) REFERENCES concept(id),
+    FOREIGN KEY (subTypeId) REFERENCES concept(id)
+)
+PCTFREE 10 PCTUSED 80;
 
 -- Clean up helper procedures.
 DROP PROCEDURE drop_table;
