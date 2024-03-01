@@ -47,8 +47,7 @@ CREATE TABLE identifier
     FOREIGN KEY (moduleId) REFERENCES concept (id)
 );
 
-\
-copy identifier FROM 'Snapshot/Terminology/sct2_Identifier_Snapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy identifier FROM 'Snapshot/Terminology/sct2_Identifier_Snapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- Relationship file.
