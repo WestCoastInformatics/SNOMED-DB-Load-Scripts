@@ -11,8 +11,7 @@ CREATE TABLE concept
     FOREIGN KEY (definitionStatusId) REFERENCES concept (id)
 );
 
-\
-copy concept FROM 'Snapshot/Terminology/sct2_Concept_Snapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy concept FROM 'Snapshot/Terminology/sct2_Concept_Snapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 -- Description file.
 DROP TABLE IF EXISTS description CASCADE;
@@ -33,8 +32,7 @@ CREATE TABLE description
     FOREIGN KEY (caseSignificanceId) REFERENCES concept (id)
 );
 
-\
-copy description FROM 'Snapshot/Terminology/sct2_Description_Snapshot-en_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy description FROM 'Snapshot/Terminology/sct2_Description_Snapshot-en_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 -- Identifier file.
 DROP TABLE IF EXISTS identifier CASCADE;
@@ -75,8 +73,7 @@ CREATE TABLE relationship
     FOREIGN KEY (modifierId) REFERENCES concept (id)
 );
 
-\
-copy relationship FROM 'Snapshot/Terminology/sct2_Relationship_Snapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy relationship FROM 'Snapshot/Terminology/sct2_Relationship_Snapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 -- Relationship concrete values file.
 DROP TABLE IF EXISTS relationshipconcretevalues CASCADE;
@@ -99,8 +96,7 @@ CREATE TABLE relationshipconcretevalues
     FOREIGN KEY (modifierId) REFERENCES concept (id)
 );
 
-\
-copy relationshipconcretevalues FROM 'Snapshot/Terminology/sct2_RelationshipConcreteValues_Snapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy relationshipconcretevalues FROM 'Snapshot/Terminology/sct2_RelationshipConcreteValues_Snapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- OWL Expression file.
@@ -119,8 +115,7 @@ CREATE TABLE owlexpression
     FOREIGN KEY (referencedComponentId) REFERENCES concept (id)
 );
 
-\
-copy owlexpression FROM 'Snapshot/Terminology/sct2_sRefset_OWLExpressionSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy owlexpression FROM 'Snapshot/Terminology/sct2_sRefset_OWLExpressionSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- Stated Relationship file.
@@ -145,8 +140,7 @@ CREATE TABLE statedrelationship
     FOREIGN KEY (modifierId) REFERENCES concept (id)
 );
 
-\
-copy statedrelationship FROM 'Snapshot/Terminology/sct2_StatedRelationship_Snapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy statedrelationship FROM 'Snapshot/Terminology/sct2_StatedRelationship_Snapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- Text Definition file.
@@ -168,8 +162,7 @@ CREATE TABLE textdefinition
     FOREIGN KEY (caseSignificanceId) REFERENCES concept (id)
 );
 
-\
-copy textdefinition FROM 'Snapshot/Terminology/sct2_TextDefinition_Snapshot-en_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy textdefinition FROM 'Snapshot/Terminology/sct2_TextDefinition_Snapshot-en_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- Association Reference refset file.
@@ -188,8 +181,7 @@ CREATE TABLE association
     FOREIGN KEY (targetComponent) REFERENCES concept (id)
 );
 
-\
-copy association FROM 'Snapshot/Refset/Content/der2_cRefset_AssociationSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy association FROM 'Snapshot/Refset/Content/der2_cRefset_AssociationSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- Attribute Value refset file.
@@ -208,8 +200,7 @@ CREATE TABLE attributevalue
     FOREIGN KEY (valueId) REFERENCES concept (id)
 );
 
-\
-copy attributevalue FROM 'Snapshot/Refset/Content/der2_cRefset_AttributeValueSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy attributevalue FROM 'Snapshot/Refset/Content/der2_cRefset_AttributeValueSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- Simple refset file.
@@ -226,8 +217,7 @@ CREATE TABLE simple
     FOREIGN KEY (refsetId) REFERENCES concept (id)
 );
 
-\
-copy simple FROM 'Snapshot/Refset/Content/der2_Refset_SimpleSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy simple FROM 'Snapshot/Refset/Content/der2_Refset_SimpleSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- No more complex map, ICD9CM maps deprecated
@@ -290,8 +280,7 @@ CREATE TABLE extendedmap
     FOREIGN KEY (mapCategoryId) REFERENCES concept (id)
 );
 
-\
-copy extendedmap FROM 'Snapshot/Refset/Map/der2_iisssccRefset_ExtendedMapSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy extendedmap FROM 'Snapshot/Refset/Map/der2_iisssccRefset_ExtendedMapSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- Simple Map refset file.
@@ -309,8 +298,7 @@ CREATE TABLE simplemap
     FOREIGN KEY (refsetId) REFERENCES concept (id)
 );
 
-\
-copy simplemap FROM 'Snapshot/Refset/Map/der2_sRefset_SimpleMapSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy simplemap FROM 'Snapshot/Refset/Map/der2_sRefset_SimpleMapSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- Language refset file.
@@ -329,8 +317,7 @@ CREATE TABLE language
     FOREIGN KEY (acceptabilityId) REFERENCES concept (id)
 );
 
-\
-copy language FROM 'Snapshot/Refset/Language/der2_cRefset_LanguageSnapshot-en_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy language FROM 'Snapshot/Refset/Language/der2_cRefset_LanguageSnapshot-en_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- Refset Descriptor refset file.
@@ -350,8 +337,7 @@ CREATE TABLE refsetdescriptor
     FOREIGN KEY (refsetId) REFERENCES concept (id)
 );
 
-\
-copy refsetdescriptor FROM 'Snapshot/Refset/Metadata/der2_cciRefset_RefsetDescriptorSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy refsetdescriptor FROM 'Snapshot/Refset/Metadata/der2_cciRefset_RefsetDescriptorSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- Description Type refset file.
@@ -370,8 +356,7 @@ CREATE TABLE descriptiontype
     FOREIGN KEY (refsetId) REFERENCES concept (id)
 );
 
-\
-copy descriptiontype FROM 'Snapshot/Refset/Metadata/der2_ciRefset_DescriptionTypeSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy descriptiontype FROM 'Snapshot/Refset/Metadata/der2_ciRefset_DescriptionTypeSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- MRCM Attribute Domain refset file.
@@ -397,8 +382,7 @@ CREATE TABLE mrcmattributedomain
     FOREIGN KEY (contentTypeId) REFERENCES concept (id)
 );
 
-\
-copy mrcmattributedomain FROM 'Snapshot/Refset/Metadata/der2_cissccRefset_MRCMAttributeDomainSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy mrcmattributedomain FROM 'Snapshot/Refset/Metadata/der2_cissccRefset_MRCMAttributeDomainSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- MRCM Module Scope refset file.
@@ -417,8 +401,7 @@ CREATE TABLE mrcmmodulescope
     FOREIGN KEY (mrcmRuleRefsetId) REFERENCES concept (id)
 );
 
-\
-copy mrcmmodulescope FROM 'Snapshot/Refset/Metadata/der2_cRefset_MRCMModuleScopeSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy mrcmmodulescope FROM 'Snapshot/Refset/Metadata/der2_cRefset_MRCMModuleScopeSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- MRCM Attribute Range refset file.
@@ -441,8 +424,7 @@ CREATE TABLE mrcmattributerange
     FOREIGN KEY (contentTypeId) REFERENCES concept (id)
 );
 
-\
-copy mrcmattributerange FROM 'Snapshot/Refset/Metadata/der2_ssccRefset_MRCMAttributeRangeSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy mrcmattributerange FROM 'Snapshot/Refset/Metadata/der2_ssccRefset_MRCMAttributeRangeSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- MRCM Domain refset file.
@@ -466,8 +448,7 @@ CREATE TABLE mrcmdomain
     FOREIGN KEY (refsetId) REFERENCES concept (id)
 );
 
-\
-copy mrcmdomain FROM 'Snapshot/Refset/Metadata/der2_sssssssRefset_MRCMDomainSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy mrcmdomain FROM 'Snapshot/Refset/Metadata/der2_sssssssRefset_MRCMDomainSnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 
 -- Module Dependency refset file.
@@ -486,8 +467,7 @@ CREATE TABLE moduledependency
     FOREIGN KEY (refsetId) REFERENCES concept (id)
 );
 
-\
-copy moduledependency FROM 'Snapshot/Refset/Metadata/der2_ssRefset_ModuleDependencySnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy moduledependency FROM 'Snapshot/Refset/Metadata/der2_ssRefset_ModuleDependencySnapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
 -- Transitive closure table.
 DROP TABLE IF EXISTS transitiveclosure CASCADE;
@@ -501,6 +481,5 @@ CREATE TABLE transitiveclosure
     FOREIGN KEY (subTypeId) REFERENCES concept (id)
 );
 
-\
-copy transitiveclosure FROM 'Snapshot/Terminology/sct2_TransitiveClosure_Snapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
+\copy transitiveclosure FROM 'Snapshot/Terminology/sct2_TransitiveClosure_Snapshot_${editionLabel}_${editionVersion}.txt' WITH DELIMITER E '\t' QUOTE E '\\' ENCODING 'UTF8' CSV HEADER;
 
