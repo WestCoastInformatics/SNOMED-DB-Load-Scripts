@@ -53,8 +53,8 @@ def parse_args():
         args = parser.parse_args()
     except SystemExit:
         badargs = errors[3]
-        print(badargs + args)
-        exit(1)
+        print "{}".format(badargs + args)
+        sys.exit(1)
 
    # Check if the arguments are valid
     if not args.relsFile:  # Check if relsFile is provided
@@ -67,8 +67,8 @@ def parse_args():
     # Check for argument errors
     if badargs:
         print_usage()
-        print(f"\n{badargs}")
-        exit(1)
+        print "\n{}".format(badargs)
+        sys.exit(1)
 
     return parser.parse_args()
 
@@ -96,8 +96,8 @@ def initRelationships(relsFile, historyFile):
                 codes[destinationId] = 1
             pass
     except IOError as e:
-        print(f"Failed to open {relsFile}: {e}")
-        exit(1)
+        print "Failed to open {}: {}".format(relsFile, e)
+        sys.exit(1)
 
     # Load appropriate history relationships
     if history:
@@ -132,7 +132,7 @@ def initRelationships(relsFile, historyFile):
                 parChd[targetComponentId].append(referencedComponentId)
                 codes[referencedComponentId] = 1
 
-        print(f"      {ct} historical relationships loaded")
+        print "      {} historical relationships loaded".format(ct)
 
 
 ## Function to get descendants
@@ -163,15 +163,15 @@ def print_help(parser=None, namespace=None, values=None, option_strings=None, de
         --history-{min,mod,max}: Add historical relationships to support ECL HISTORY-{MIN,MOD,MAX} profile
         --help: On-line help
     """
-    print(help_text)
+    print help_text
     sys.exit(0) # Exit the program
 
 ## Function to print usage
 def print_usage():
-    print("""
+    print """
 Usage: compute_transitive_closure.py [--help] [--force] [--history-{min,mod,max}] <relsFile>
   e.g. compute_transitive_closure.py --history-min --noself
-""")
+"""
 
 ## Main function
 def main():
@@ -195,33 +195,33 @@ def main():
         elif "Terminology" in historyFile:
             historyFile = historyFile.replace("Terminology", "Refset/Content")
         else:
-            raise Exception(f"Unable to determine path to Association refset file from relationships file = {relsFile}")
+            raise Exception("Unable to determine path to Association refset file from relationships file = {}".format(relsFile))
         if not os.path.exists(historyFile):
-            raise Exception(f"Computed path to Association refset file does not exist =  {historyFile}")
+            raise Exception("Computed path to Association refset file does not exist =  {}".format(historyFile))
 
     # Check if output file already exists
     if os.path.exists(outputFile):
         if force:
             os.remove(outputFile)
         else:
-            print(f"Output file already exists: {outputFile}")
-            exit(1)
+            print "Output file already exists: {}".format(outputFile)
+            sys.exit(1)
 
     # Start processing
-    print("------------------------------------------------------------")
-    print("Starting ...", time.asctime())
-    print("------------------------------------------------------------")
-    print("Isa rel      : ", isaRel)
-    print("Rels file    : ", relsFile)
-    print("Self         : ", self)
-    print("Output file  : ", outputFile)
+    print "------------------------------------------------------------"
+    print "Starting ...", time.asctime()
+    print "------------------------------------------------------------"
+    print "Isa rel      : ", isaRel
+    print "Rels file    : ", relsFile
+    print "Self         : ", self
+    print "Output file  : ", outputFile
     if history:
-        print("History      : ", history)
-        print("History file : ", historyFile)
-    print("\n")
+        print "History      : ", history
+        print "History file : ", historyFile
+    print "\n"
 
     # Load PAR/CHD relationships map
-    print("    Load PAR/CHD rels ...", time.asctime())
+    print "    Load PAR/CHD rels ...", time.asctime()
     global codes, parChd, seen
     codes = {}
     parChd = {}
@@ -230,7 +230,7 @@ def main():
     initRelationships(relsFile, "")
 
     # Write transitive closure to output file
-    print("    Write transitive closure table ...", time.asctime())
+    print "    Write transitive closure table ...", time.asctime()
     with open(outputFile, 'w') as f:
         writer = csv.writer(f, delimiter='\t')
         writer.writerow(["superTypeId", "subTypeId", "depth"])
@@ -251,11 +251,11 @@ def main():
                     writer.writerow([code, desc, depth-1])
 
         if ct % 10000 == 0:
-            print(f"      {ct} codes processed ...", time.asctime())
+            print "      {} codes processed ...".format(ct), time.asctime()
 
-    print("------------------------------------------------------------")
-    print("finished ...", time.asctime())
-    print("------------------------------------------------------------\n")
+    print "------------------------------------------------------------"
+    print "finished ...", time.asctime()
+    print "------------------------------------------------------------\n"
 
 
 ## Run main function

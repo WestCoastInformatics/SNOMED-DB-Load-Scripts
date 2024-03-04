@@ -10,10 +10,8 @@ password=snomed
 tns_name=ORCLCDB
 export NLS_LANG=AMERICAN_AMERICA.UTF8
 
-# Oracle Docker on Ubuntu does not allow removing the log file
-# Do this step prior to starting Docker to execute populate scripts
-# /bin/rm -f oracle.log
-# touch oracle.log
+# Clear the log file. If it doesn't exist, create it.
+> oracle.log
 ef=0
 
 echo "See oracle.log for detailed output"
@@ -29,8 +27,22 @@ DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 echo "    Compute transitive closure relationship file ... `/bin/date`" | tee -a oracle.log
 relFile=$(find $DIR/Snapshot/Terminology/ -name "*_Relationship_Snapshot_*.txt" -print -quit)
-$DIR/compute_transitive_closure.pl --force --noself $relFile >> oracle.log 2>&1
-if [ $? -ne 0 ]; then ef=1; fi
+#check if system has python or perl, run the corresponding script
+if command -v python &> /dev/null
+then
+  echo "python found, running python script" >> oracle.log 2>&1
+  python $DIR/compute_transitive_closure.py --force --noself $relFile >> oracle.log 2>&1
+  if [ $? -ne 0 ]; then ef=1; fi
+elif command -v perl &> /dev/null
+then
+  echo "perl found, running perl script" >> oracle.log 2>&1
+  perl $DIR/compute_transitive_closure.pl --force --noself $relFile >> oracle.log 2>&1
+  if [ $? -ne 0 ]; then ef=1; fi
+# if none are present, print error message
+else
+  echo "No python or perl found. Please install one of them." | tee -a oracle.log
+  ef=1
+fi
 
 echo "    Create tables ... `/bin/date`" | tee -a oracle.log
 echo "@oracle_tables.sql" |  $ORACLE_HOME/bin/sqlplus $user/$password@$tns_name  >> oracle.log 2>&1
