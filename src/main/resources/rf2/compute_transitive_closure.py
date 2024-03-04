@@ -53,7 +53,7 @@ def parse_args():
         args = parser.parse_args()
     except SystemExit:
         badargs = errors[3]
-        print "{}".format(badargs + args)
+        print("{}".format(badargs + args))
         sys.exit(1)
 
    # Check if the arguments are valid
@@ -67,7 +67,7 @@ def parse_args():
     # Check for argument errors
     if badargs:
         print_usage()
-        print "\n{}".format(badargs)
+        print("\n{}".format(badargs))
         sys.exit(1)
 
     return parser.parse_args()
@@ -96,7 +96,7 @@ def initRelationships(relsFile, historyFile):
                 codes[destinationId] = 1
             pass
     except IOError as e:
-        print "Failed to open {}: {}".format(relsFile, e)
+        print("Failed to open {}: {}".format(relsFile, e))
         sys.exit(1)
 
     # Load appropriate history relationships
@@ -132,7 +132,7 @@ def initRelationships(relsFile, historyFile):
                 parChd[targetComponentId].append(referencedComponentId)
                 codes[referencedComponentId] = 1
 
-        print "      {} historical relationships loaded".format(ct)
+        print("      {} historical relationships loaded".format(ct))
 
 
 ## Function to get descendants
@@ -208,20 +208,20 @@ def main():
             sys.exit(1)
 
     # Start processing
-    print "------------------------------------------------------------"
-    print "Starting ...", time.asctime()
-    print "------------------------------------------------------------"
-    print "Isa rel      : ", isaRel
-    print "Rels file    : ", relsFile
-    print "Self         : ", self
-    print "Output file  : ", outputFile
+    print( "------------------------------------------------------------")
+    print( "Starting ...", time.asctime())
+    print( "------------------------------------------------------------")
+    print( "Isa rel      : ", isaRel)
+    print( "Rels file    : ", relsFile)
+    print( "Self         : ", self)
+    print( "Output file  : ", outputFile)
     if history:
-        print "History      : ", history
-        print "History file : ", historyFile
-    print "\n"
+        print( "History      : ", history
+        print "History file : ", historyFile)
+    print( "\n")
 
     # Load PAR/CHD relationships map
-    print "    Load PAR/CHD rels ...", time.asctime()
+    print( "    Load PAR/CHD rels ...", time.asctime())
     global codes, parChd, seen
     codes = {}
     parChd = {}
@@ -230,7 +230,7 @@ def main():
     initRelationships(relsFile, "")
 
     # Write transitive closure to output file
-    print "    Write transitive closure table ...", time.asctime()
+    print( "    Write transitive closure table ...", time.asctime())
     with open(outputFile, 'w') as f:
         writer = csv.writer(f, delimiter='\t')
         writer.writerow(["superTypeId", "subTypeId", "depth"])
@@ -251,11 +251,11 @@ def main():
                     writer.writerow([code, desc, depth-1])
 
         if ct % 10000 == 0:
-            print "      {} codes processed ...".format(ct), time.asctime()
+            print( "      {} codes processed ...".format(ct), time.asctime())
 
-    print "------------------------------------------------------------"
-    print "finished ...", time.asctime()
-    print "------------------------------------------------------------\n"
+    print( "------------------------------------------------------------")
+    print( "finished ...", time.asctime())
+    print( "------------------------------------------------------------\n")
 
 
 ## Run main function
