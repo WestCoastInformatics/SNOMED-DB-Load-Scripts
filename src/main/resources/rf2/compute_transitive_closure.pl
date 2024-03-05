@@ -66,7 +66,8 @@ if (-e "$outputFile") {
     if ($force) {
     unlink $outputFile;
     } else {
-          die "Output file already exists: $outputFile\n";
+          warn "Output file already exists: $outputFile. Check this is not an old file\n";
+          exit(0)
     }
 }
 

@@ -10,6 +10,7 @@ import csv
 import glob
 import argparse
 import time
+import logging
 
 #
 # Set Defaults & Environment
@@ -22,6 +23,9 @@ self = True
 codes = {}
 parChd = {}
 seen = {}
+
+# Set up logging
+logging.basicConfig(level=logging.DEBUG)
 
 # Define the errors dictionary globally
 errors = {
@@ -96,7 +100,7 @@ def initRelationships(relsFile, historyFile):
                 codes[destinationId] = 1
             pass
     except IOError as e:
-        print "Failed to open {}: {}".format(relsFile, e)
+        logging.error("Failed to open {}: {}".format(relsFile, e))
         exit(1)
 
     # Load appropriate history relationships
@@ -132,7 +136,7 @@ def initRelationships(relsFile, historyFile):
                 parChd[targetComponentId].append(referencedComponentId)
                 codes[referencedComponentId] = 1
 
-        print "      {} historical relationships loaded".format(ct)
+        logging.info("      {} historical relationships loaded".format(ct))
 
 
 
@@ -205,8 +209,8 @@ def main():
         if force:
             os.remove(outputFile)
         else:
-            print "Output file already exists: {}".format(outputFile)
-            exit(1)
+            logging.warning("Output file already exists: {}".format(outputFile))
+            exit(0)
 
     # Start processing
     print("------------------------------------------------------------")
@@ -252,7 +256,7 @@ def main():
                     writer.writerow([code, desc, depth-1])
 
         if ct % 10000 == 0:
-            print "      {} codes processed ...".format(ct), time.asctime()
+            logging.info("      {} codes processed ...".format(ct), time.asctime())
 
     print("------------------------------------------------------------")
     print("finished ...", time.asctime())
