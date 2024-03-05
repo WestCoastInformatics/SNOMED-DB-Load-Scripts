@@ -67,7 +67,7 @@ def parse_args():
     # Check for argument errors
     if badargs:
         print_usage()
-        print("\n{}".format(badargs))]
+        print("\n{}".format(badargs))
         exit(1)
 
     return parser.parse_args()
