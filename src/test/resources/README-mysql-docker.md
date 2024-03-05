@@ -9,6 +9,8 @@ Before proceeding, make sure you updated the hostname in the load script.
 
    sudo chmod +x rf2/populate_mysql_db.sh
    sudo chmod +x rf2/compute_transitive_closure.pl
+   sudo chmod +x rf2/compute_transitive_closure.py
+
 ```
 Follow the instructions for the version you are using below.
 
