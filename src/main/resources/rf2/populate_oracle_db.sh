@@ -36,12 +36,6 @@ echo "@oracle_tables.sql" |  $ORACLE_HOME/bin/sqlplus $user/$password@$tns_name 
 if [ $? -ne 0 ]; then ef=1; fi
 fi
 
-if [ $ef -ne 1 ]; then
-echo "    Create views ... `/bin/date`" | tee -a oracle.log
-echo "@oracle_view.sql"|$ORACLE_HOME/bin/sqlplus $user/$password@$tns_name  >> oracle.log 2>&1
-if [ $? -ne 0 ]; then ef=1; fi
-fi
-
 ## Load RF2 tables
 if [ $ef -ne 1 ]; then
 echo "    Load concept table data ... `/bin/date`" | tee -a oracle.log
