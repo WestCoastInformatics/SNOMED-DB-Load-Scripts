@@ -96,7 +96,7 @@ def initRelationships(relsFile, historyFile):
                 codes[destinationId] = 1
             pass
     except IOError as e:
-        print(f"Failed to open {relsFile}: {e}")
+        print "Failed to open {}: {}".format(relsFile, e)
         exit(1)
 
     # Load appropriate history relationships
@@ -196,16 +196,16 @@ def main():
         elif "Terminology" in historyFile:
             historyFile = historyFile.replace("Terminology", "Refset/Content")
         else:
-            raise Exception(f"Unable to determine path to Association refset file from relationships file = {relsFile}")
+            raise Exception("Unable to determine path to Association refset file from relationships file = {}".format(relsFile))
         if not os.path.exists(historyFile):
-            raise Exception(f"Computed path to Association refset file does not exist =  {historyFile}")
+            raise Exception("Computed path to Association refset file does not exist =  {}".format(historyFile))
 
     # Check if output file already exists
     if os.path.exists(outputFile):
         if force:
             os.remove(outputFile)
         else:
-            print(f"Output file already exists: {outputFile}")
+            print "Output file already exists: {}".format(outputFile)
             exit(1)
 
     # Start processing
