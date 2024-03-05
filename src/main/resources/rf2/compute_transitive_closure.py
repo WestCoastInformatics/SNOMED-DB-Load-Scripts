@@ -67,7 +67,7 @@ def parse_args():
     # Check for argument errors
     if badargs:
         print_usage()
-        print(f"\n{badargs}")
+        print("\n{}".format(badargs))]
         exit(1)
 
     return parser.parse_args()
@@ -132,7 +132,8 @@ def initRelationships(relsFile, historyFile):
                 parChd[targetComponentId].append(referencedComponentId)
                 codes[referencedComponentId] = 1
 
-        print(f"      {ct} historical relationships loaded")
+        print "      {} historical relationships loaded".format(ct)
+
 
 
 ## Function to get descendants
@@ -251,7 +252,7 @@ def main():
                     writer.writerow([code, desc, depth-1])
 
         if ct % 10000 == 0:
-            print(f"      {ct} codes processed ...", time.asctime())
+            print "      {} codes processed ...".format(ct), time.asctime()
 
     print("------------------------------------------------------------")
     print("finished ...", time.asctime())
