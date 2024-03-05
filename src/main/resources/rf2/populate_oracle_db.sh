@@ -34,14 +34,6 @@ echo "    Create tables ... `/bin/date`" | tee -a oracle.log
 echo "@oracle_tables.sql" |  $ORACLE_HOME/bin/sqlplus $user/$password@$tns_name  >> oracle.log 2>&1
 if [ $? -ne 0 ]; then ef=1; fi
 
-## Load TC table
-if [ $ef -ne 1 ]; then
-echo "    Load transitive closure table ... `/bin/date`" | tee -a oracle.log
-$ORACLE_HOME/bin/sqlldr $user/$password@$tns_name control="transitiveclosure.ctl" >> oracle.log 2>&1
-if [ $? -ne 0 ]; then ef=1; fi
-cat concept.log >> oracle.log
-fi
-
 if [ $ef -ne 1 ]; then
 echo "    Create views ... `/bin/date`" | tee -a oracle.log
 echo "@oracle_view.sql"|$ORACLE_HOME/bin/sqlplus $user/$password@$tns_name  >> oracle.log 2>&1
@@ -124,6 +116,14 @@ echo "    Load simple refset table data ... `/bin/date`" | tee -a oracle.log
 $ORACLE_HOME/bin/sqlldr $user/$password@$tns_name control="simple.ctl" >> oracle.log 2>&1
 if [ $? -ne 0 ]; then ef=1; fi
 cat simple.log >> oracle.log
+fi
+
+## Load TC table
+if [ $ef -ne 1 ]; then
+echo "    Load transitive closure table ... `/bin/date`" | tee -a oracle.log
+$ORACLE_HOME/bin/sqlldr $user/$password@$tns_name control="transitiveclosure.ctl" >> oracle.log 2>&1
+if [ $? -ne 0 ]; then ef=1; fi
+cat concept.log >> oracle.log
 fi
 
 # No more complex maps

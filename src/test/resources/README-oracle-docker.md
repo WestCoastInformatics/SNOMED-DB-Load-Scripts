@@ -23,7 +23,7 @@
     cd /wci/data
     unzip -o /wci/projects/SNOMED-DB-Load-Scripts/target/snomed-db-scripts-oracle.*.zip
     sudo chmod +x rf2/populate_oracle_db.sh
-    sudo chmod +x rf2/compute_transitive_closure.pl
+    sudo chmod +x rf2/compute_transitive_closure.py
 
 ```
 
