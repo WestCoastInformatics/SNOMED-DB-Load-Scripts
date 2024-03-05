@@ -16,7 +16,7 @@
 4. If running an Oracle Database Docker Container on Linux use docker login and enter your hub.docker.com
  credentials for image to download.
 
-# Linux Instructions
+# Instructions
 
 ## File Setup
 ```
@@ -24,7 +24,9 @@
     unzip -o /wci/projects/SNOMED-DB-Load-Scripts/target/snomed-db-scripts-oracle.*.zip
     sudo chmod +x rf2/populate_oracle_db.sh
     sudo chmod +x rf2/compute_transitive_closure.py
-
+    
+    # To avoid permission issues, make sure to grant write perms to the all folders
+    chmod -R 777 rf2
 ```
 
 ## If not running Docker as root

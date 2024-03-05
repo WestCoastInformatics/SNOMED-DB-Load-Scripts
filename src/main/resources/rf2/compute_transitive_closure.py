@@ -210,7 +210,7 @@ def main():
             os.remove(outputFile)
         else:
             logging.warning("Output file already exists: {}".format(outputFile))
-            exit(0)
+            exit(1)
 
     # Start processing
     print("------------------------------------------------------------")
