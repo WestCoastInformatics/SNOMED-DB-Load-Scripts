@@ -30,9 +30,11 @@ relFile=$(find $DIR/Snapshot/Terminology/ -name "*_Relationship_Snapshot_*.txt" 
 $DIR/compute_transitive_closure.py --noself $relFile >> oracle.log 2>&1
 if [ $? -ne 0 ]; then ef=1; fi
 
+if [ $ef -ne 1 ]; then
 echo "    Create tables ... `/bin/date`" | tee -a oracle.log
 echo "@oracle_tables.sql" |  $ORACLE_HOME/bin/sqlplus $user/$password@$tns_name  >> oracle.log 2>&1
 if [ $? -ne 0 ]; then ef=1; fi
+fi
 
 if [ $ef -ne 1 ]; then
 echo "    Create views ... `/bin/date`" | tee -a oracle.log

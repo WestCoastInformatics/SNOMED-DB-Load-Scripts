@@ -27,9 +27,11 @@ relFile=$(find $DIR/Snapshot/Terminology/ -name "*_Relationship_Snapshot_*.txt" 
 $DIR/compute_transitive_closure.pl --force --noself $relFile >> postgres.log 2>&1
 if [ $? -ne 0 ]; then ef=1; fi
 
+if [ $ef -ne 1 ]; then
 echo "    Create and load tables ... `/bin/date`" | tee -a postgres.log
 psql < psql_tables.sql >> postgres.log 2>&1
 if [ $? -ne 0 ]; then ef=1; fi
+fi
 
 if [ $ef -ne 1 ]; then
 echo "    Create indexes ... `/bin/date`" | tee -a postgres.log

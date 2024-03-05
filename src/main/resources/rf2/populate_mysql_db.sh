@@ -48,9 +48,11 @@ else
   ef=1
 fi
 
+if [ $ef -ne 1 ]; then
 echo "    Create and load tables ... `/bin/date`" | tee -a mysql.log
 mysql -vvv $host -u $user $password --local-infile $db_name < mysql_tables.sql >> mysql.log 2>&1
 if [ $? -ne 0 ]; then ef=1; fi
+fi
 
 if [ $ef -ne 1 ]; then
 echo "    Create indexes ... `/bin/date`" | tee -a mysql.log
