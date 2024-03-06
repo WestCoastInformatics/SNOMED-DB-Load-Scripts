@@ -17,4 +17,4 @@ Go to the above link for documentation, and additional downloads.
 * Views with denormalized concept preferred names
 
 ### Developer Notes
-https://github.com/bcarlsenca/SNOMED-DB-Load-Scripts.git
+https://github.com/WestCoastInformatics/SNOMED-DB-Load-Scripts

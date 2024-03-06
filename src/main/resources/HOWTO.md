@@ -13,9 +13,9 @@ This HOWTO describes how to use the installer scripts to load SNOMED into a data
 4.  Open the desired zip file and extract the 'Snapshot' folder into the 'data/rf2' folder. Once completed:
 	* The 'data' folder's content will include:
 		- 'rf2' folder
-		- HOWTO.txt
+		- HOWTO.md
 		- LICENSE.txt
-		- README.txt
+		- README.md
 	* The 'data/rf2' folder's contents will include:
 		- 'Snapshot' folder
 		- *.sql files

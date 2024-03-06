@@ -2,7 +2,7 @@
 
 #
 # Database connection parameters
-# Please edit these variables to reflect your environment
+# PLEASE EDIT THESE VARIABLES TO REFLECT YOUR ENVIRONMENT
 export PGHOST=[UPDATE]
 export PGUSER=postgres
 export PGPASSWORD=

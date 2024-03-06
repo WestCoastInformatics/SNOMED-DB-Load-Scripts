@@ -4,7 +4,7 @@
 # Database connection parameters
 # Set if necessary
 #export ORACLE_HOME=/app/oracle/product/12.1.0/dbhome_1
-# Please edit these variables to reflect your environment
+# PLEASE EDIT THESE VARIABLES TO REFLECT YOUR ENVIRONMENT
 user=snomed
 password=snomed
 tns_name=ORCLCDB

@@ -1,7 +1,7 @@
 #!/bin/bash -f
 #
 # Database connection parameters
-# Please edit these variables to reflect your environment
+# PLEASE EDIT THESE VARIABLES TO REFLECT YOUR ENVIRONMENT
 host=[UPDATE]
 user=root
 password=admin
