@@ -1,8 +1,8 @@
 # How To Use the SNOMED CT Database Loader
-This HOWTO describes how to use the installer scripts to load SNOMED into a database.
+This HOWTO describes how to use the installer scripts to load SNOMEDCT into a database.
 
 ## Installation
-1.  Download the database loader zip file from the http://www.westcoastinformatics.com/resources.html website. Select the appropriate database-version pair (i.e. oracle-US Edition). Depending on your database and edition, identify the appropriate target's zip file.
+1.  Download the database loader zip file from the https://www.westcoastinformatics.com/products/db-load-scripts website. Select the appropriate database-version pair (i.e. oracle-US Edition). Depending on your database and edition, identify the appropriate target's zip file.
 
 2.  Unzip the contents of the zip file into a 'data' folder
 
