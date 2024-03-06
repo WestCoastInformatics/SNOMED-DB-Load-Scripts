@@ -13,7 +13,7 @@ Go to the above link for documentation, and additional downloads.
 * Support for Oracle, Postgres, and MySQL (and MariaDB)
 * Support for RF2 data format
 * Denormalization of concept/description ids for contextualized lookup
-* Builds transitive closure table from RF2 snapshot, inferred, SNOMED file.
+* Builds transitive closure table from RF2 snapshot, inferred, SNOMEDCT file.
 * Views with denormalized concept preferred names
 
 ### Developer Notes
