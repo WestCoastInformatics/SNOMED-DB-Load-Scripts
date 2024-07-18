@@ -28,16 +28,16 @@ relFile=$(find $DIR/Snapshot/Terminology/ -name "*_Relationship_Snapshot_*.txt" 
 if command -v python &> /dev/null
 then
   echo "python found, running python script" >> mysql.log 2>&1
-  python $DIR/compute_transitive_closure.py --force --noself $relFile >> mysql.log 2>&1
+  python $DIR/compute_transitive_closure.py --force --noself $relFile >> postgres.log 2>&1
   if [ $? -ne 0 ]; then ef=1; fi
 elif command -v perl &> /dev/null
 then
   echo "perl found, running perl script" >> mysql.log 2>&1
-  perl $DIR/compute_transitive_closure.pl --force --noself $relFile >> mysql.log 2>&1
+  perl $DIR/compute_transitive_closure.pl --force --noself $relFile >> postgres.log 2>&1
   if [ $? -ne 0 ]; then ef=1; fi
 # if none are present, print error message
 else
-  echo "No python or perl found. Please install one of them." | tee -a mysql.log
+  echo "No python or perl found. Please install one of them." | tee -a postgres.log
   ef=1
 fi
 
