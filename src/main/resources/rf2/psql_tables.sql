@@ -23,7 +23,7 @@ CREATE TABLE description (
     conceptId NUMERIC(20) NOT NULL,
     languageCode CHAR(2) NOT NULL,
     typeId NUMERIC(20) NOT NULL,
-    term VARCHAR(255) NOT NULL,
+    term VARCHAR(4096) NOT NULL,
     caseSignificanceId NUMERIC(20) NOT NULL,
     FOREIGN KEY (moduleId) REFERENCES concept(id),
     FOREIGN KEY (conceptId) REFERENCES concept(id),
@@ -37,7 +37,7 @@ CREATE TABLE description (
 DROP TABLE IF EXISTS identifier CASCADE;
 CREATE TABLE identifier (
     identifierSchemeId NUMERIC(20) NOT NULL,
-    alternateIdentifier VARCHAR(255) NOT NULL,
+    alternateIdentifier VARCHAR(4096) NOT NULL,
     effectiveTime DATE NOT NULL,
     active BOOLEAN NOT NULL,
     moduleId NUMERIC(20) NOT NULL,
