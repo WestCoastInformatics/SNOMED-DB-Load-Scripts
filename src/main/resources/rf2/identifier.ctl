@@ -11,7 +11,7 @@ fields terminated by X'09'
 trailing nullcols
 (
     identifierSchemeId INTEGER EXTERNAL,
-    alternateIdentifier CHAR(255),
+    alternateIdentifier CHAR(4096),
     effectiveTime DATE "YYYYMMDD",
     active INTEGER EXTERNAL,
     moduleId INTEGER EXTERNAL,
