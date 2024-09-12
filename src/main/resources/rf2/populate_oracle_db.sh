@@ -28,19 +28,19 @@ DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 echo "    Compute transitive closure relationship file ... `/bin/date`" | tee -a oracle.log
 relFile=$(find $DIR/Snapshot/Terminology/ -name "*_Relationship_Snapshot_*.txt" -print -quit)
 #check if system has python or perl, run the corresponding script
-if command -v python &> /dev/null
+if command -v perl &> /dev/null
 then
-  echo "python found, running python script" >> oracle.log 2>&1
-  python $DIR/compute_transitive_closure.py --force --noself $relFile >> oracle.log 2>&1
+  echo "perl found, running perl script" >> postgres.log 2>&1
+  perl $DIR/compute_transitive_closure.pl --force --noself $relFile >> postgres.log 2>&1
   if [ $? -ne 0 ]; then ef=1; fi
-elif command -v perl &> /dev/null
+elif command -v python &> /dev/null
 then
-  echo "perl found, running perl script" >> oracle.log 2>&1
-  perl $DIR/compute_transitive_closure.pl --force --noself $relFile >> oracle.log 2>&1
+  echo "python found, running python script" >> postgres.log 2>&1
+  python $DIR/compute_transitive_closure.py --force --noself $relFile >> postgres.log 2>&1
   if [ $? -ne 0 ]; then ef=1; fi
 # if none are present, print error message
 else
-  echo "No python or perl found. Please install one of them." | tee -a oracle.log
+  echo "No perl or python found on your machine. Please install one of them to proceed." | tee -a postgres.log
   ef=1
 fi
 
