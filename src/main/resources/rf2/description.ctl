@@ -17,6 +17,6 @@ trailing nullcols
     conceptId INTEGER EXTERNAL,
     languageCode CHAR(2),
     typeId INTEGER EXTERNAL,
-    term CHAR(255),
+    term CHAR(4096),
     caseSignificanceId INTEGER EXTERNAL
 )
