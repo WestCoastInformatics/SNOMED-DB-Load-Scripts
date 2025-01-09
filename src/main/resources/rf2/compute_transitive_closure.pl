@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# Copyright 2024 West Coast Informatics, Inc
+# Copyright 2025 West Coast Informatics, Inc
 #
 # Computes transitive closure from a snapshot inferred RF2 relationships file.
 #
