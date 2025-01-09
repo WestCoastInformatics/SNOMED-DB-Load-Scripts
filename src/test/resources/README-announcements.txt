@@ -4,8 +4,8 @@
 
 -- SNOMED International Jan 1:
 
-Is it August already?! Announcing #SNOMEDCT DB load and transitive
-closure scripts for the 20240101 International Edition! Out-of-the-box
+Is it January already?! Announcing #SNOMEDCT DB load and transitive
+closure scripts for the 20250101 International Edition! Out-of-the-box
 support for #Postgres, #Oracle, #MySQL, and #MariaDB.
 #MakingTerminologyEasy #MakingSnomedEasy #snomed
 https://www.westcoastinformatics.com/products/db-load-scripts
@@ -20,7 +20,8 @@ https://www.westcoastinformatics.com/products/db-load-scripts
 
 ----
 
-### LinkedIn
+The new year is here! Announcing #SNOMEDCT DB load and transitive closure scripts for the 20250101 International Edition! Out-of-the-box support for #Postgres, #Oracle, #MySQL, and #MariaDB.
+See https://westcoastinformatics.com/products/db-load-scripts  #MakingTerminologyEasy #MakingSnomedEasy #snomedct
 
 At West Coast Informatics, we are experts in loading healthcare terminology data 
 into standard databases.  Announcing updates to our Database Load Scripts for the 
@@ -31,11 +32,11 @@ These tools are designed to provide an easy mechanism to load SNOMEDCT into Post
 #MakingTerminologyEasy #MakingSnomedEasy #snomedct
 
 ### UMLS Users Mailing List
-Subject: 20240901 SNOMEDCT US Edition DB load and transitive closure scripts
+Subject: 20250101 SNOMEDCT DB load and transitive closure scripts
 
 Hi all,
 
-NLM recently posted the September 01, 2024 update of the SNOMEDCT US Edition.
+NLM recently posted the January 01, 2025 update of the SNOMEDCT International Edition.
 
 For those interested in interacting with SNOMEDCT data through a relational database,
 we have a utility to make it easy to load the data into a Postgres, Oracle, MySQL (or MariaDB) database.
