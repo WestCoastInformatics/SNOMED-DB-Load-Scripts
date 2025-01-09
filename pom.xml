@@ -28,7 +28,7 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <editionVersion>20240701</editionVersion>
+        <editionVersion>20250101</editionVersion>
         <editionType>Core</editionType>
         <editionLabel>INT</editionLabel>
       </properties>
