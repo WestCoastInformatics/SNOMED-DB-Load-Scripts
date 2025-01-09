@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# Copyright 2024 West Coast Informatics, Inc
+# Copyright 2025 West Coast Informatics, Inc
 #
 # Computes transitive closure from a snapshot inferred RF2 relationships file.
 #
@@ -11,6 +11,7 @@ import glob
 import argparse
 import time
 import logging
+from typing import Dict, List, Any
 
 #
 # Set Defaults & Environment
@@ -47,48 +48,33 @@ class HelpAction(argparse.Action):
 ## Function to parse arguments
 def parse_args():
     parser = argparse.ArgumentParser(add_help=False)
-    parser.add_argument('--history', choices=['min', 'mod', 'max'])
+    parser.add_argument('--history-min', action='store_const', const='min', dest='history')
+    parser.add_argument('--history-mod', action='store_const', const='mod', dest='history')
+    parser.add_argument('--history-max', action='store_const', const='max', dest='history')
     parser.add_argument('--force', action='store_true')
     parser.add_argument('--noself', action='store_true')
-    parser.add_argument('relsFile')
-    parser.add_argument('--help', action=HelpAction)  # Add the custom --help option
+    parser.add_argument('relsFile', help='RF2 relationships file')
+    parser.add_argument('--help', action=HelpAction)
 
-    try:
-        args = parser.parse_args()
-    except SystemExit:
-        badargs = errors[3]
-        print(badargs + args)
-        exit(1)
-
-   # Check if the arguments are valid
-    if not args.relsFile:  # Check if relsFile is provided
-        badargs = errors[4].format("relsFile")
-    elif args.history and args.history not in ['min', 'mod', 'max']:  # Check if history is one of the allowed values
-        badargs = errors[1] + args.history
-    else:
-        badargs = None
-
-    # Check for argument errors
-    if badargs:
-        print_usage()
-        print("\n{}".format(badargs))
-        exit(1)
-
-    return parser.parse_args()
+    args = parser.parse_args()
+    return args
 
 ## Function to initialize relationships
 def initRelationships(relsFile, historyFile):
     global codes, parChd
     try:
         # Read relationships
-        with open(relsFile, 'r') as f:
+        with open(relsFile, 'r', newline='') as f:
             reader = csv.reader(f, delimiter='\t')
+            next(reader)  # Skip header row
             ct = 1
             # iterate through rels file
             for row in reader:
+                if len(row) < 10:  # Add validation
+                    continue
                 id, effectiveTime, active, moduleId, sourceId, destinationId, relationshipGroup, typeId, characteristicTypeId, modifierId = row
                 # skip inactive or non-isa relationships
-                if typeId != isaRel or not active:
+                if typeId != isaRel or active != '1':  # Check for '1' instead of boolean
                     continue
                 ct += 1
 
@@ -98,47 +84,51 @@ def initRelationships(relsFile, historyFile):
                 parChd[destinationId].append(sourceId)
                 codes[sourceId] = 1
                 codes[destinationId] = 1
-            pass
+
+        logging.info(f"      {ct} relationships loaded")
     except IOError as e:
         logging.error("Failed to open {}: {}".format(relsFile, e))
         exit(1)
 
     # Load appropriate history relationships
     if history:
-        ct = 0
-        qual = {}
-        if history == "min":
-            qual = {"900000000000527005": 1}
-        elif history == "mod":
-            qual = {"900000000000527005": 1, "900000000000526001": 1, "900000000000528000": 1, "1186924009": 1}
+        try:
+            ct = 0
+            qual = {}
+            if history == "min":
+                qual = {"900000000000527005": 1}
+            elif history == "mod":
+                qual = {"900000000000527005": 1, "900000000000526001": 1,
+                       "900000000000528000": 1, "1186924009": 1}
 
-        with open(historyFile, 'r') as IN:
-            for line in IN:
-                line = line.rstrip('\r\n')
+            with open(historyFile, 'r') as IN:
+                reader = csv.reader(IN, delimiter='\t')
+                next(reader)  # Skip header
+                for row in reader:
+                    id, effectiveTime, active, moduleId, refsetId, referencedComponentId, targetComponentId = row
 
-                id, effectiveTime, active, moduleId, refsetId, referencedComponentId, targetComponentId = line.split('\t')
+                    # skip unless qualifying historical association
+                    if not (history == "max" or refsetId in qual):
+                        continue
+                    # skip inactive
+                    if active != '1':  # Check for string '1' instead of boolean
+                        continue
+                    # skip if targetComponentId not in codes
+                    if targetComponentId not in codes:
+                        continue
 
-                # skip unless the refsetId represents a qualifying historical association
-                if not (history == "max" or refsetId in qual):
-                    continue
-                # skip inactive
-                if not active:
-                    continue
-                # skip if the targetComponentId isn't one of the codes (to avoid moved_to/from stuff)
-                if targetComponentId not in codes:
-                    continue
+                    ct += 1
 
-                ct += 1
+                    # push new child for parent
+                    if targetComponentId not in parChd:
+                        parChd[targetComponentId] = []
+                    parChd[targetComponentId].append(referencedComponentId)
+                    codes[referencedComponentId] = 1
 
-                # push new child (inactive concept) for parent (active concept)
-                if targetComponentId not in parChd:
-                    parChd[targetComponentId] = []
-                parChd[targetComponentId].append(referencedComponentId)
-                codes[referencedComponentId] = 1
-
-        logging.info("      {} historical relationships loaded".format(ct))
-
-
+            logging.info(f"      {ct} historical relationships loaded")
+        except Exception as e:
+            logging.error(f"Error processing history file: {e}")
+            raise
 
 ## Function to get descendants
 def getDescendants(par, depth):
@@ -180,83 +170,76 @@ Usage: compute_transitive_closure.py [--help] [--force] [--history-{min,mod,max}
 
 ## Main function
 def main():
-    global badargs, ct
     args = parse_args()
+    global force, self, history
     force = args.force
     self = not args.noself
-    relsFile = args.relsFile
     history = args.history
+    relsFile = args.relsFile
     outputFile = relsFile.replace("_Relationship_", "_TransitiveClosure_")
-    # initialize ct
-    ct = 0
 
-    # Check history file
-    historyFile = ""
-    if history:
-        # Attempt to find the Association refset
-        historyFile = relsFile.replace("sct2_Relationship_", "der2_cRefset_Association")
-        if historyFile.startswith("der2"):
-            historyFile = "../Refset/Content/" + historyFile
-        elif "Terminology" in historyFile:
-            historyFile = historyFile.replace("Terminology", "Refset/Content")
-        else:
-            raise Exception("Unable to determine path to Association refset file from relationships file = {}".format(relsFile))
-        if not os.path.exists(historyFile):
-            raise Exception("Computed path to Association refset file does not exist =  {}".format(historyFile))
-
-    # Check if output file already exists
+    # Check output file
     if os.path.exists(outputFile):
         if force:
             os.remove(outputFile)
         else:
-            logging.warning("Output file already exists: {}".format(outputFile))
-            exit(1)
+            raise Exception(f"Output file already exists: {outputFile}. Check this is not an old file")
 
-    # Start processing
-    print("------------------------------------------------------------")
-    print("Starting ...", time.asctime())
-    print("------------------------------------------------------------")
-    print("Isa rel      : ", isaRel)
-    print("Rels file    : ", relsFile)
-    print("Self         : ", self)
-    print("Output file  : ", outputFile)
+    # Determine history file path
+    historyFile = ""
     if history:
-        print("History      : ", history)
-        print("History file : ", historyFile)
+        historyFile = relsFile.replace("sct2_Relationship_", "der2_cRefset_Association")
+        if historyFile.startswith("der2"):
+            historyFile = os.path.join("..", "Refset", "Content", historyFile)
+        elif "Terminology" in historyFile:
+            historyFile = historyFile.replace("Terminology", "Refset/Content")
+        else:
+            raise Exception(f"Unable to determine path to Association refset file from relationships file = {relsFile}")
+        if not os.path.exists(historyFile):
+            raise Exception(f"Computed path to Association refset file does not exist = {historyFile}")
+
+    # Print configuration
+    print("------------------------------------------------------------")
+    print(f"Starting ... {time.asctime()}")
+    print("------------------------------------------------------------")
+    print(f"Isa rel      : {isaRel}")
+    print(f"Rels file    : {relsFile}")
+    print(f"Self         : {self}")
+    print(f"Output file  : {outputFile}")
+    if history:
+        print(f"History      : {history}")
+        print(f"History file : {historyFile}")
     print("\n")
 
-    # Load PAR/CHD relationships map
-    print("    Load PAR/CHD rels ...", time.asctime())
-    global codes, parChd, seen
-    codes = {}
-    parChd = {}
-    seen = {}
     # Initialize relationships
-    initRelationships(relsFile, "")
+    print(f"    Load PAR/CHD rels ... {time.asctime()}")
+    initRelationships(relsFile, historyFile)
 
     # Write transitive closure to output file
     print("    Write transitive closure table ...", time.asctime())
-    with open(outputFile, 'w') as f:
+    ct = 0  # Initialize counter here
+    with open(outputFile, 'w', newline='') as f:
         writer = csv.writer(f, delimiter='\t')
         writer.writerow(["superTypeId", "subTypeId", "depth"])
         for code in codes.keys():
+            ct += 1  # Increment counter for each code
             # skip root
             if code == root:
-                ct += 1
                 continue
             # short circuit for leaf nodes
             if code not in parChd and self:
                 writer.writerow([code, code, 0])
             # gather descendants
             else:
+                seen.clear()  # Clear seen dict for each new code
                 descendants = getDescendants(code, 1)
                 for desc, depth in descendants.items():
                     if not self and not (depth-1):
                         continue
                     writer.writerow([code, desc, depth-1])
 
-        if ct % 10000 == 0:
-            logging.info("      {} codes processed ...".format(ct), time.asctime())
+            if ct % 10000 == 0:
+                logging.info(f"      {ct} codes processed ... {time.asctime()}")
 
     print("------------------------------------------------------------")
     print("finished ...", time.asctime())
