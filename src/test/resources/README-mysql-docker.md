@@ -24,7 +24,7 @@ Follow the instructions for the version you are using below.
 ### MySQL 8.4
 
 1. Launch the container </br>
-   `docker run --name snomed-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=snomed -d --rm mysql:8.04 --local_infile=ON`
+   `docker run --name snomed-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=snomed -d --rm mysql:8.4 --local_infile=ON`
 
 2. Build Server
 
