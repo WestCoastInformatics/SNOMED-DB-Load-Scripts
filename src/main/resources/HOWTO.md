@@ -28,7 +28,8 @@ See [https://youtu.be/917T6D3b5ro](https://youtu.be/917T6D3b5ro)
 
 5.	In a text editor, open the temp-folder's appropriate "populate" script as defined by your database. 
    * For example:
-       - For MySQL (or MariaDB), use the "populate_mysql_db.sh" script
+       - For MySQL (or MariaDB < 11), use the "populate_mysql_db.sh" script
+       - For MariaDB 11+, use the "populate_maria_db.sh" script
        - For Postgres, use the "populate_postgres_db.sh" script
        - For Oracle, use the "populate_oracle_db.sh" script
    * Configure settings at the top of the "populate" script for your environment
@@ -43,4 +44,4 @@ See [https://youtu.be/917T6D3b5ro](https://youtu.be/917T6D3b5ro)
 
 
 7.	Execute the "populate" script
-	* Note: a complete log file will appear as `mysql.log`, `postgres.log`, or `oracle.log`
+	* Note: a complete log file will appear as `mysql.log`, `mariadb.log`, `postgres.log`, or `oracle.log`
