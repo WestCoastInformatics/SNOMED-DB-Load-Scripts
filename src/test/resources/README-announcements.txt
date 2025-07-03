@@ -2,10 +2,10 @@
 
 ### Twitter
 
--- SNOMED International Jan 1:
+-- SNOMED International July 1:
 
-Is it January already?! Announcing #SNOMEDCT DB load and transitive
-closure scripts for the 20250101 International Edition! Out-of-the-box
+Is it July already?! Announcing #SNOMEDCT DB load and transitive
+closure scripts for the 20250701 International Edition! Out-of-the-box
 support for #Postgres, #Oracle, #MySQL, and #MariaDB.
 #MakingTerminologyEasy #MakingSnomedEasy #snomed
 https://www.westcoastinformatics.com/products/db-load-scripts
@@ -20,19 +20,19 @@ https://www.westcoastinformatics.com/products/db-load-scripts
 
 ----
 
-The new year is here! Announcing #SNOMEDCT DB load and transitive closure scripts for the 20250101 International Edition! Out-of-the-box support for #Postgres, #Oracle, #MySQL, and #MariaDB.
+The new year is here! Announcing #SNOMEDCT DB load and transitive closure scripts for the 20250701 International Edition! Out-of-the-box support for #Postgres, #Oracle, #MySQL, and #MariaDB.
 See https://westcoastinformatics.com/products/db-load-scripts  #MakingTerminologyEasy #MakingSnomedEasy #snomedct
 
 At West Coast Informatics, we are experts in loading healthcare terminology data
 into standard databases.  Announcing updates to our Database Load Scripts for the
-20240901 US Edition of SNOMEDCT.
+20250301 US Edition of SNOMEDCT.
 Download now at https://www.westcoastinformatics.com/products/db-load-scripts
 
 These tools are designed to provide an easy mechanism to load SNOMEDCT into Postgres, MySQL (or MariaDB),  or Oracle databases.  These resources are free to use and will assist you with loading core SNOMED CT data and transitive closure tables into supported environments. These projects are hosted on Github and we welcome  any feedback or community contributions.
 #MakingTerminologyEasy #MakingSnomedEasy #snomedct
 
 ### UMLS Users Mailing List
-Subject: 20250101 SNOMEDCT DB load and transitive closure scripts
+Subject: 20250701 SNOMEDCT DB load and transitive closure scripts
 
 Hi all,
 
