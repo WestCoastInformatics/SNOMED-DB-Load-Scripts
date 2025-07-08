@@ -1,14 +1,13 @@
-# Oracle 12c BUILD INSTRUCTIONS
+# Oracle 19c BUILD INSTRUCTIONS
 ## Prerequisites
 1. Log into DockerHub and agree to Oracle's Terms of Service
    - [Oracle DB Enterprise Repository](https://container-registry.oracle.com/ords/f?p=113:1:103153009327673::::FSP_LANGUAGE_PREFERENCE:&cs=3vvrLolDIFGAxz-ReKVoNrPBwhCCJtGRffMagNzTnvafG3AeKT2KLWKQSclqKpS-c6TF2uprvjENxXOETZOmgfQ)
      - Log in with your account and then click on "Continue" on the line enterprise. This will allow you to pull the Oracle Database Enterprise Edition image from the Oracle Container Registry.
    - Pull the image from the Oracle Container Registry
      - `docker login container-registry.oracle.com` and enter your hub.docker.com credentials
-     - `docker pull container-registry.oracle.com/database/enterprise:12.2.0.1-slim`
-     - `docker pull container-registry.oracle.com/database/enterprise:12.1.0.2`
+     - `docker pull container-registry.oracle.com/database/enterprise:19.3.0.0`
 2. For testing oracle, run a docker oracle instance
-   - https://dzone.com/articles/oracle-12c-image-installation-in-docker
+   - https://dzone.com/articles/oracle-19c-image-installation-in-docker
 
 3. If you're running this locally, you will use `localhost` as the host. If you're running this on a remote server,
   you will use the server's IP address as the host.
@@ -24,7 +23,7 @@
     unzip -o /wci/projects/SNOMED-DB-Load-Scripts/target/snomed-db-scripts-oracle.*.zip
     sudo chmod +x rf2/populate_oracle_db.sh
     sudo chmod +x rf2/compute_transitive_closure.py
-    
+
     # To avoid permission issues, make sure to grant write perms to the all folders
     chmod -R 777 rf2
 ```
@@ -41,12 +40,9 @@ Create log files and allow read/write to all users.
 ```
     export dir=/wci/data/
     cd $dir
-    
-    #For store/oracle/database-enterprise:12.2.0.1-slim
-    sudo docker run --name snomed-oracle -v $dir:/data -d --rm -p 8080:8080 -p 1521:1521 container-registry.oracle.com/database/enterprise:12.2.0.1-slim
-    
-    #For container-registry.oracle.com/database/enterprise:12.1.0.2
-    sudo docker run --name snomed-oracle -v $dir:/data -d --rm -p 8080:8080 -p 1521:1521  container-registry.oracle.com/database/enterprise:12.1.0.2
+
+    #For container-registry.oracle.com/database/enterprise:19.3.0.0
+    sudo docker run --name snomed-oracle -v $dir:/data -d --rm -p 8080:8080 -p 1521:1521  container-registry.oracle.com/database/enterprise:19.3.0.0
 ```
 ## Populate DB
 
@@ -62,7 +58,7 @@ Create log files and allow read/write to all users.
     create user snomed identified by snomed;
     GRANT CONNECT, RESOURCE, DBA TO snomed;
     exit
-    
+
     root@842bfb3da1f1:/# cd /data/rf2
     root@842bfb3da1f1:/data/rf2# ./populate_oracle_db.sh
 ```

@@ -3,7 +3,7 @@
 #
 # Database connection parameters
 # Set if necessary
-#export ORACLE_HOME=/app/oracle/product/12.1.0/dbhome_1
+#export ORACLE_HOME=/opt/oracle/product/19c/dbhome_1
 # PLEASE EDIT THESE VARIABLES TO REFLECT YOUR ENVIRONMENT
 user=snomed
 password=snomed
