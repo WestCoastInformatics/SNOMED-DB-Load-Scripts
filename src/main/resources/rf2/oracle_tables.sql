@@ -58,7 +58,7 @@ CREATE TABLE description
     conceptId          NUMERIC(20) NOT NULL,
     languageCode       CHAR(2)     NOT NULL,
     typeId             NUMERIC(20) NOT NULL,
-    term               VARCHAR2(4096) NOT NULL,
+    term               CLOB        NOT NULL,
     caseSignificanceId NUMERIC(20) NOT NULL,
     FOREIGN KEY (moduleId) REFERENCES concept (id),
     FOREIGN KEY (conceptId) REFERENCES concept (id),
@@ -72,7 +72,7 @@ EXECUTE drop_table('identifier');
 CREATE TABLE identifier
 (
     identifierSchemeId    NUMERIC(20) NOT NULL,
-    alternateIdentifier   VARCHAR2(4096) NOT NULL,
+    alternateIdentifier   CLOB        NOT NULL,
     effectiveTime         DATE        NOT NULL,
     active                NUMERIC(1)  NOT NULL,
     moduleId              NUMERIC(20) NOT NULL,
