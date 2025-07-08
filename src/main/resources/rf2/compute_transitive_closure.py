@@ -11,7 +11,7 @@ import glob
 import argparse
 import time
 import logging
-from typing import Dict, List, Any
+# Remove type hints for Python 2.7 compatibility
 
 #
 # Set Defaults & Environment
@@ -64,7 +64,7 @@ def initRelationships(relsFile, historyFile):
     global codes, parChd
     try:
         # Read relationships
-        with open(relsFile, 'r', newline='') as f:
+        with open(relsFile, 'r') as f:
             reader = csv.reader(f, delimiter='\t')
             next(reader)  # Skip header row
             ct = 1
@@ -85,7 +85,7 @@ def initRelationships(relsFile, historyFile):
                 codes[sourceId] = 1
                 codes[destinationId] = 1
 
-        logging.info(f"      {ct} relationships loaded")
+        logging.info("      {} relationships loaded".format(ct))
     except IOError as e:
         logging.error("Failed to open {}: {}".format(relsFile, e))
         exit(1)
@@ -125,9 +125,9 @@ def initRelationships(relsFile, historyFile):
                     parChd[targetComponentId].append(referencedComponentId)
                     codes[referencedComponentId] = 1
 
-            logging.info(f"      {ct} historical relationships loaded")
+            logging.info("      {} historical relationships loaded".format(ct))
         except Exception as e:
-            logging.error(f"Error processing history file: {e}")
+            logging.error("Error processing history file: {}".format(e))
             raise
 
 ## Function to get descendants
@@ -183,7 +183,7 @@ def main():
         if force:
             os.remove(outputFile)
         else:
-            raise Exception(f"Output file already exists: {outputFile}. Check this is not an old file")
+            raise Exception("Output file already exists: {}. Check this is not an old file".format(outputFile))
 
     # Determine history file path
     historyFile = ""
@@ -194,31 +194,31 @@ def main():
         elif "Terminology" in historyFile:
             historyFile = historyFile.replace("Terminology", "Refset/Content")
         else:
-            raise Exception(f"Unable to determine path to Association refset file from relationships file = {relsFile}")
+            raise Exception("Unable to determine path to Association refset file from relationships file = {}".format(relsFile))
         if not os.path.exists(historyFile):
-            raise Exception(f"Computed path to Association refset file does not exist = {historyFile}")
+            raise Exception("Computed path to Association refset file does not exist = {}".format(historyFile))
 
     # Print configuration
     print("------------------------------------------------------------")
-    print(f"Starting ... {time.asctime()}")
+    print("Starting ... {}".format(time.asctime()))
     print("------------------------------------------------------------")
-    print(f"Isa rel      : {isaRel}")
-    print(f"Rels file    : {relsFile}")
-    print(f"Self         : {self}")
-    print(f"Output file  : {outputFile}")
+    print("Isa rel      : {}".format(isaRel))
+    print("Rels file    : {}".format(relsFile))
+    print("Self         : {}".format(self))
+    print("Output file  : {}".format(outputFile))
     if history:
-        print(f"History      : {history}")
-        print(f"History file : {historyFile}")
+        print("History      : {}".format(history))
+        print("History file : {}".format(historyFile))
     print("\n")
 
     # Initialize relationships
-    print(f"    Load PAR/CHD rels ... {time.asctime()}")
+    print("    Load PAR/CHD rels ... {}".format(time.asctime()))
     initRelationships(relsFile, historyFile)
 
     # Write transitive closure to output file
-    print("    Write transitive closure table ...", time.asctime())
+    print("    Write transitive closure table ... {}".format(time.asctime()))
     ct = 0  # Initialize counter here
-    with open(outputFile, 'w', newline='') as f:
+    with open(outputFile, 'w') as f:
         writer = csv.writer(f, delimiter='\t')
         writer.writerow(["superTypeId", "subTypeId", "depth"])
         for code in codes.keys():
@@ -239,10 +239,10 @@ def main():
                     writer.writerow([code, desc, depth-1])
 
             if ct % 10000 == 0:
-                logging.info(f"      {ct} codes processed ... {time.asctime()}")
+                logging.info("      {} codes processed ... {}".format(ct, time.asctime()))
 
     print("------------------------------------------------------------")
-    print("finished ...", time.asctime())
+    print("finished ... {}".format(time.asctime()))
     print("------------------------------------------------------------\n")
 
 
