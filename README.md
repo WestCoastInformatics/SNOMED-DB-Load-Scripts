@@ -13,10 +13,11 @@ queries about "child of", "descendant of", and "descendant or self of".
 
 Minimum Specification
 ---------------------
-- MySQL v8.+, MariaDB 10.+, MariaDB 11.+
+- MySQL v8.4
   - MySQL v8 requires the server to run with "--local_infile=ON"
-- Oracle v19.+
-- Postgres v13.+, v14.+, v15.+, v16.+, v17.+
+- MariaDB 10.+, MariaDB 11.+
+- Oracle v19.+, v21.+, v23.+
+- Postgres v14.+, v15.+, v16.+, v17.+, v18.+
 
 Installation
 ------------
