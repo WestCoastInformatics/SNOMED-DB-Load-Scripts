@@ -11,6 +11,7 @@
       <excludes>
         <exclude>rf1/**</exclude>
         <exclude>**/*mysql*</exclude>
+        <exclude>**/*maria*</exclude>
         <exclude>**/*postgres*</exclude>
         <exclude>**/*psql*</exclude>
       </excludes>
