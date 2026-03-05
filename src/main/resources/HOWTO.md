@@ -45,3 +45,31 @@ See [https://youtu.be/917T6D3b5ro](https://youtu.be/917T6D3b5ro)
 
 7.	Execute the "populate" script
 	* Note: a complete log file will appear as `mysql.log`, `mariadb.log`, `postgres.log`, or `oracle.log`
+
+## Oracle: VARCHAR2 vs CLOB for description and text definition (4096 characters)
+
+SNOMED CT allows description and text definition terms up to 4096 characters. Oracle's default `VARCHAR2` limit is 4000 characters, so this package uses **CLOB** for:
+
+- `description.term`
+- `textdefinition.term`
+
+**Writing queries**
+
+- **Simple SELECT:** Use the column as usual. Oracle converts CLOB to character data for display.
+  ```sql
+  SELECT term FROM description WHERE id = 12345;
+  SELECT term FROM textdefinitionwithnames WHERE conceptId = 12345;
+  ```
+
+- **GROUP BY, ORDER BY, or DISTINCT** on these columns: Use `DBMS_LOB.SUBSTR` so Oracle can compare/sort. Use the same expression in both SELECT and GROUP BY when grouping by the term.
+  ```sql
+  SELECT DBMS_LOB.SUBSTR(term, 4000, 1) AS term, COUNT(*)
+  FROM description
+  WHERE active = 1
+  GROUP BY DBMS_LOB.SUBSTR(term, 4000, 1);
+  ```
+
+- **Views:** Views that expose these columns (e.g. `descriptionwithnames`, `textdefinitionwithnames`, `conceptwithnames` / preferred name) return CLOB. Same rules: simple SELECT is fine; for GROUP BY/ORDER BY on the term column, wrap in `DBMS_LOB.SUBSTR(column, 4000, 1)`.
+
+**Why CLOB and not VARCHAR2(4096)?**  
+`VARCHAR2(4096)` requires Oracle's `MAX_STRING_SIZE=EXTENDED`, which is not default and is not assumed for this package. Using CLOB works on all supported Oracle versions without that setting.
