@@ -18,81 +18,81 @@ Add new versions, remove versions whose final release is the past and, bump the 
 
 - For testing postgres, run a docker postgres instance - https://hub.docker.com/_/postgres
 
-### Postgres 13.20
+### Postgres 14.23
 
 1. Launch the container </br>
-   `docker run --name snomed-postgres -p 5432:5432 -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=snomed -d --rm postgres:13.20`
+   `docker run --name snomed-postgres -p 5432:5432 -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=snomed -d --rm postgres:14.23`
 
 2. Build Server
 
 ```
    export dir=/wci/data/
    cd $dir
-   docker run -it -v "$dir":/data postgres:13.20 /bin/bash
+   docker run -it -v "$dir":/data postgres:14.23 /bin/bash
 
    root@842bfb3da1f1:/# cd /data/rf2
    root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
 ```
 
-### Postgres 14.17
+### Postgres 15.18
 
 1. Launch the container </br>
-   `docker run --name snomed-postgres -p 5432:5432 -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=snomed -d --rm postgres:14.17`
+   `docker run --name snomed-postgres -p 5432:5432 -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=snomed -d --rm postgres:15.1812`
 
 2. Build Server
 
 ```
    export dir=/wci/data/
    cd $dir
-   docker run -it -v "$dir":/data postgres:14.17 /bin/bash
+   docker run -it -v "$dir":/data postgres:15.18 /bin/bash
 
    root@842bfb3da1f1:/# cd /data/rf2
    root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
 ```
 
-### Postgres 15.12
+### Postgres 16.14
 
 1. Launch the container </br>
-   `docker run --name snomed-postgres -p 5432:5432 -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=snomed -d --rm postgres:15.12`
+   `docker run --name snomed-postgres -p 5432:5432 -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=snomed -d --rm postgres:16.14`
 
 2. Build Server
 
 ```
    export dir=/wci/data/
    cd $dir
-   docker run -it -v "$dir":/data postgres:15.12 /bin/bash
+   docker run -it -v "$dir":/data postgres:16.14 /bin/bash
 
    root@842bfb3da1f1:/# cd /data/rf2
    root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
 ```
 
-### Postgres 16.8
+### Postgres 17.10
 
 1. Launch the container </br>
-   `docker run --name snomed-postgres -p 5432:5432 -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=snomed -d --rm postgres:16.8`
+   `docker run --name snomed-postgres -p 5432:5432 -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=snomed -d --rm postgres:17.10`
 
 2. Build Server
 
 ```
    export dir=/wci/data/
    cd $dir
-   docker run -it -v "$dir":/data postgres:16.8 /bin/bash
+   docker run -it -v "$dir":/data postgres:17.10 /bin/bash
 
    root@842bfb3da1f1:/# cd /data/rf2
    root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh
 ```
 
-### Postgres 17.4
+### Postgres 18.4
 
 1. Launch the container </br>
-   `docker run --name snomed-postgres -p 5432:5432 -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=snomed -d --rm postgres:17.4`
+   `docker run --name snomed-postgres -p 5432:5432 -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=snomed -d --rm postgres:18.4`
 
 2. Build Server
 
 ```
    export dir=/wci/data/
    cd $dir
-   docker run -it -v "$dir":/data postgres:17.4 /bin/bash
+   docker run -it -v "$dir":/data postgres:18.4 /bin/bash
 
    root@842bfb3da1f1:/# cd /data/rf2
    root@842bfb3da1f1:/data/rf2# ./populate_postgres_db.sh

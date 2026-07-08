@@ -15,8 +15,8 @@ Minimum Specification
 ---------------------
 - MySQL v8.4
   - MySQL v8 requires the server to run with "--local_infile=ON"
-- MariaDB 10.+, MariaDB 11.+
-- Oracle v19.+, v21.+, v23.+
+- MariaDB v10.+, v11.+, v12.+
+- Oracle v19.+, v21.+, v26.+
 - Postgres v14.+, v15.+, v16.+, v17.+, v18.+
 
 Installation

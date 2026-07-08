@@ -53,7 +53,23 @@ Follow the instructions for the version you are using below.
    root@842bfb3da1f1:/data/rf2# ./populate_mysql_db.sh
 ```
 
-### MariaDB - 11.4
+### MariaDB - 11.4, 11.8
+
+1. Launch the container </br>
+   `docker run --name snomed-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=snomed -d --rm mariadb:11.4`
+
+2. Build Server
+
+```
+   export dir=/wci/data/
+   cd $dir
+   docker run -it -v $dir:/data mariadb:11.4 /bin/bash
+
+   root@842bfb3da1f1:/# cd /data/rf2
+   root@842bfb3da1f1:/data/rf2# ./populate_maria_db.sh
+```
+
+### MariaDB - 12.3
 
 1. Launch the container </br>
    `docker run --name snomed-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=snomed -d --rm mariadb:11.4`

@@ -1,4 +1,4 @@
-# Oracle 19c BUILD INSTRUCTIONS
+# Oracle 19c, 21c, 26ai BUILD INSTRUCTIONS
 ## Prerequisites
 1. Log into DockerHub and agree to Oracle's Terms of Service
    - [Oracle DB Enterprise Repository](https://container-registry.oracle.com/ords/f?p=113:1:103153009327673::::FSP_LANGUAGE_PREFERENCE:&cs=3vvrLolDIFGAxz-ReKVoNrPBwhCCJtGRffMagNzTnvafG3AeKT2KLWKQSclqKpS-c6TF2uprvjENxXOETZOmgfQ)
@@ -6,6 +6,9 @@
    - Pull the image from the Oracle Container Registry
      - `docker login container-registry.oracle.com` and enter your hub.docker.com credentials
      - `docker pull container-registry.oracle.com/database/enterprise:19.3.0.0`
+     - `docker pull container-registry.oracle.com/database/enterprise:21.3.0.0`
+     - `docker pull container-registry.oracle.com/database/enterprise:23.26.1.0`
+
 2. For testing oracle, run a docker oracle instance
    - https://dzone.com/articles/oracle-19c-image-installation-in-docker
 
@@ -36,7 +39,7 @@
 ```
 
 ## Launch the container
-Create log files and allow read/write to all users.
+Create log files and allow read/write to all users.  Use the appropriate image for the version you are using for 19c, 21c, or 26ai.
 ```
     export dir=/wci/data/
     cd $dir
