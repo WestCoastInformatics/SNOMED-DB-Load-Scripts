@@ -36,7 +36,7 @@
     <profile>
       <id>US</id>
       <properties>
-        <editionVersion>20260301</editionVersion>
+        <editionVersion>20260901</editionVersion>
         <editionType>National</editionType>
         <editionLabel>US1000124</editionLabel>
       </properties>
